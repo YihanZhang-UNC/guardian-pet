@@ -30,9 +30,10 @@ jobs:
           mkdir -p _site
           # 营销官网(含 launch-film.mp4 / launch-poster.jpg / favicon)作为站点根
           cp -r website/* _site/
-          # App 高保真原型挂到 /app
-          mkdir -p _site/app
+          # App 高保真原型挂到 /app(中文)与 /app-en(英文)
+          mkdir -p _site/app _site/app-en
           cp -r app/* _site/app/
+          cp -r app-en/* _site/app-en/
           touch _site/.nojekyll
 
       - name: Upload artifact

@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=1.0, user-scalable=no">
+<title>Guardian App · Interactive Prototype (EN)</title>
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="stylesheet" href="app.css">
+</head>
+<body>
+
+<div class="stage">
+  <div class="stage-note">
+    <h1>Guardian App · Prototype</h1>
+    <p>Passwordless sign-in · tap the tabs · bell opens alerts · quick actions open Vet / Report / Shop / Coverage · switch pets by the chips · live map on Location</p>
+  </div>
+
+  <div class="phone" id="phone">
+    <div class="phone-notch"></div>
+
+    <!-- ============ Login ============ -->
+    <section class="login" id="login">
+      <div class="login-mesh"></div>
+      <div class="login-top">
+        <div class="login-logo">GUARDIAN<span>.</span></div>
+        <p class="login-tag">Style is just the beginning.</p>
+      </div>
+      <div class="login-hero">
+        <div class="login-ring"><div class="login-orb"></div><span>🐶</span></div>
+      </div>
+      <div class="login-sheet">
+        <h2>Welcome back, Guardian</h2>
+        <p class="login-sub">No password. Just you and the one who can't speak.</p>
+
+        <div class="login-methods" id="loginMethods">
+          <button class="auth-btn google" data-auth="Google">
+            <span class="auth-ic"><svg viewBox="0 0 24 24" width="20" height="20"><path fill="#EA4335" d="M12 10.2v3.9h5.4c-.24 1.4-1.66 4.1-5.4 4.1-3.25 0-5.9-2.7-5.9-6s2.65-6 5.9-6c1.85 0 3.1.78 3.8 1.45l2.6-2.5C16.7 1.6 14.6.7 12 .7 6.9.7 2.8 4.8 2.8 10s4.1 9.3 9.2 9.3c5.3 0 8.8-3.7 8.8-8.95 0-.6-.07-1.05-.15-1.5H12z"/></svg></span>
+            Continue with Google
+          </button>
+          <button class="auth-btn wechat" data-auth="WeChat">
+            <span class="auth-ic">💬</span>
+            Continue with WeChat
+          </button>
+          <button class="auth-btn email" data-auth="Email" id="emailToggle">
+            <span class="auth-ic">✉️</span>
+            Continue with Email
+          </button>
+        </div>
+
+        <!-- Email OTP -->
+        <div class="email-flow" id="emailFlow">
+          <div class="email-step" id="emailStep1">
+            <input type="email" id="emailInput" placeholder="you@example.com" autocomplete="email">
+            <button class="auth-btn primary" id="sendCode">Send login code</button>
+            <button class="link-back" data-back="methods">← other ways</button>
+          </div>
+          <div class="email-step" id="emailStep2" hidden>
+            <p class="otp-hint">We sent a 4-digit code to <strong id="emailEcho"></strong></p>
+            <div class="otp-row">
+              <input class="otp" maxlength="1" inputmode="numeric"><input class="otp" maxlength="1" inputmode="numeric"><input class="otp" maxlength="1" inputmode="numeric"><input class="otp" maxlength="1" inputmode="numeric">
+            </div>
+            <p class="otp-demo">Demo: any 4 digits work</p>
+            <button class="auth-btn primary" id="verifyCode">Verify & enter</button>
+            <button class="link-back" data-back="email">← change email</button>
+          </div>
+        </div>
+
+        <p class="login-legal">By continuing you agree to our Terms & Privacy. Guardian provides health nudges, not medical diagnosis.</p>
+      </div>
+    </section>
+
+    <!-- ============ Tab 1: Today ============ -->
+    <main class="screen" id="screen-home">
+      <header class="app-header">
+        <div>
+          <p class="greet" id="greeting">Good afternoon, Yihan ☀️</p>
+          <h2><span data-pet-name>Dou Dou</span> is on guard</h2>
+        </div>
+        <div class="header-actions">
+          <button class="icon-btn" data-overlay="ov-alerts" aria-label="Alerts">🔔<span class="bell-dot" id="bellDot"></span></button>
+        </div>
+      </header>
+
+      <div class="pet-switch">
+        <button class="pet-chip active" data-pet="Dou Dou" data-breed="Corgi · 4 yrs · 12.5 kg" data-emoji="🐕">🐕 Dou Dou</button>
+        <button class="pet-chip" data-pet="Mochi" data-breed="Shiba · 2 yrs · 9.8 kg" data-emoji="🐶">🐶 Mochi</button>
+        <button class="pet-chip add">＋</button>
+      </div>
+
+      <section class="guard-card">
+        <div class="guard-glow"></div>
+        <div class="guard-ring">
+          <svg viewBox="0 0 120 120">
+            <circle cx="60" cy="60" r="52" class="ring-bg"/>
+            <circle cx="60" cy="60" r="52" class="ring-fg"/>
+          </svg>
+          <div class="guard-ring-center">
+            <span class="guard-status">On Guard</span>
+            <span class="guard-sub">All normal — go do you</span>
+          </div>
+        </div>
+        <div class="guard-meta">
+          <div><span class="meta-label">Device</span><span class="meta-val ok">● Online</span></div>
+          <div><span class="meta-label">Battery</span><span class="meta-val">76%</span></div>
+          <div><span class="meta-label">Last ping</span><span class="meta-val">2 min ago</span></div>
+        </div>
+      </section>
+
+      <section class="care-card">
+        <span class="care-icon">🌤</span>
+        <div>
+          <strong>Today's care tip</strong>
+          <p>High of 33°C today. <span data-pet-name>Dou Dou</span>'s short legs sit closer to the ground — move the walk to evening, and check the pavement isn't too hot first.</p>
+        </div>
+      </section>
+
+      <section class="quick-grid">
+        <button class="quick" data-overlay="ov-vet"><span>🩺</span>Ask vet</button>
+        <button class="quick" data-overlay="ov-report"><span>📊</span>Report</button>
+        <button class="quick" data-overlay="ov-store"><span>🎨</span>Shells</button>
+        <button class="quick" data-overlay="ov-insurance"><span>🛡</span>Coverage</button>
+      </section>
+
+      <section class="tile-row">
+        <div class="tile">
+          <p class="tile-label">Activity today</p>
+          <p class="tile-num">82<span>pts</span></p>
+          <p class="tile-trend up">On par with 30-day avg</p>
+          <svg class="spark" viewBox="0 0 100 32" preserveAspectRatio="none"><polyline points="0,24 14,20 28,22 42,12 56,16 70,8 84,12 100,6" /></svg>
+        </div>
+        <div class="tile">
+          <p class="tile-label">Resting HR trend</p>
+          <p class="tile-num">Normal<span>range</span></p>
+          <p class="tile-trend">Based on its own baseline</p>
+          <svg class="spark" viewBox="0 0 100 32" preserveAspectRatio="none"><polyline points="0,16 14,18 28,14 42,17 56,15 70,16 84,14 100,16" /></svg>
+        </div>
+      </section>
+      <section class="tile-row">
+        <div class="tile">
+          <p class="tile-label">Sleep rhythm</p>
+          <p class="tile-num">9.2<span>hrs</span></p>
+          <p class="tile-trend">Slept soundly, 3 turns</p>
+          <svg class="spark" viewBox="0 0 100 32" preserveAspectRatio="none"><polyline points="0,10 14,12 28,9 42,11 56,8 70,12 84,10 100,9" /></svg>
+        </div>
+        <div class="tile">
+          <p class="tile-label">Location</p>
+          <p class="tile-num">Home<span></span></p>
+          <p class="tile-trend ok">Inside fence · safe</p>
+          <svg class="spark" viewBox="0 0 100 32" preserveAspectRatio="none"><polyline points="0,16 100,16" /></svg>
+        </div>
+      </section>
+
+      <section class="milestone-card" data-overlay="ov-report" role="button">
+        <div class="milestone-num">217</div>
+        <div>
+          <strong>Day 217 with <span data-pet-name>Dou Dou</span></strong>
+          <p>In that time we quietly handled 47 small blips and interrupted you just twice. Guardianship is restraint.</p>
+        </div>
+        <span class="chevron">›</span>
+      </section>
+
+      <section class="timeline-card">
+        <h3>Today's guard diary <span class="h3-sub">its whole day, you're in it</span></h3>
+        <ul class="timeline">
+          <li><span class="tl-time">07:42</span><span class="tl-dot"></span><span>Morning walk · 28 min · 1.9 km, took a new route</span></li>
+          <li><span class="tl-time">09:10</span><span class="tl-dot"></span><span>Breakfast, then sunbathed in the usual spot</span></li>
+          <li><span class="tl-time">12:30</span><span class="tl-dot"></span><span>Midday nap · 1.5 hrs, slept deep</span></li>
+          <li><span class="tl-time">14:05</span><span class="tl-dot"></span><span>Zoomies in the living room · probably missed you</span></li>
+        </ul>
+      </section>
+    </main>
+
+    <!-- ============ Tab 2: Health ============ -->
+    <main class="screen" id="screen-health">
+      <header class="app-header">
+        <h2>Health trends</h2>
+        <div class="header-actions"><span class="badge-plus">GUARDIAN+</span></div>
+      </header>
+
+      <div class="seg-control">
+        <button class="seg active">7D</button><button class="seg">30D</button><button class="seg">90D</button><button class="seg">365D</button>
+      </div>
+
+      <section class="chart-card">
+        <div class="chart-head"><h3>Activity</h3><span class="chart-status ok">Within baseline</span></div>
+        <svg class="chart" viewBox="0 0 320 120" preserveAspectRatio="none">
+          <path class="band" d="M0,40 C60,36 120,44 180,40 C240,36 280,42 320,38 L320,78 C280,82 240,76 180,80 C120,84 60,76 0,80 Z"/>
+          <polyline class="line" points="0,62 40,56 80,60 120,50 160,58 200,46 240,54 280,48 320,52"/>
+        </svg>
+        <p class="chart-note">The grey band is <span data-pet-name>Dou Dou</span>'s own "normal" — modeled from 365 days of data, never compared to other dogs.</p>
+      </section>
+
+      <section class="chart-card">
+        <div class="chart-head"><h3>Heart-rate variability</h3><span class="chart-status ok">Stable trend</span></div>
+        <svg class="chart" viewBox="0 0 320 120" preserveAspectRatio="none">
+          <path class="band" d="M0,44 C80,40 160,48 240,44 C280,42 300,44 320,42 L320,82 C300,84 280,82 240,84 C160,88 80,80 0,84 Z"/>
+          <polyline class="line" points="0,60 40,64 80,58 120,62 160,56 200,60 240,58 280,62 320,58"/>
+        </svg>
+        <p class="chart-note">HRV reflects long-term autonomic trends. We track "relative change," not clinical values.</p>
+      </section>
+
+      <section class="chart-card">
+        <div class="chart-head"><h3>Temperature trend</h3><span class="chart-status warn">Mild drift · watching</span></div>
+        <svg class="chart" viewBox="0 0 320 120" preserveAspectRatio="none">
+          <path class="band" d="M0,48 C80,44 160,50 240,46 C280,44 300,46 320,44 L320,80 C300,82 280,80 240,82 C160,86 80,78 0,82 Z"/>
+          <polyline class="line warn" points="0,64 40,62 80,64 120,60 160,58 200,52 240,46 280,42 320,38"/>
+        </svg>
+        <p class="chart-note">Surface-temp trend has crept up over 3 days, still within threshold. If it persists, we'll let you know — until then, no need to worry.</p>
+      </section>
+
+      <section class="chart-card">
+        <div class="chart-head"><h3>Respiration (resting)</h3><span class="chart-status ok">Within baseline</span></div>
+        <svg class="chart" viewBox="0 0 320 120" preserveAspectRatio="none">
+          <path class="band" d="M0,46 C80,42 160,50 240,46 C280,44 300,46 320,44 L320,80 C300,82 280,80 240,82 C160,86 80,78 0,82 Z"/>
+          <polyline class="line" points="0,62 40,60 80,64 120,58 160,62 200,60 240,64 280,60 320,62"/>
+        </svg>
+        <p class="chart-note">Sampled during sleep. Short post-exercise spikes are filtered by the algorithm.</p>
+      </section>
+
+      <section class="report-cta" data-overlay="ov-report" role="button">
+        <div><h3>May health report is ready</h3><p>Baseline shifts · sleep quality · vet-readable PDF</p></div>
+        <button class="btn-mini">View</button>
+      </section>
+
+      <p class="app-disclaimer">The above are data-trend records, not a medical diagnosis.</p>
+    </main>
+
+    <!-- ============ Tab 3: Location (live map) ============ -->
+    <main class="screen" id="screen-map">
+      <header class="app-header">
+        <h2>Location & fences</h2>
+        <div class="header-actions">
+          <div class="map-provider" id="mapProvider">
+            <button class="prov active" data-prov="amap">Amap</button>
+            <button class="prov" data-prov="google">Google</button>
+          </div>
+        </div>
+      </header>
+
+      <section class="map-card">
+        <div class="map-shell">
+          <div id="map-canvas"></div>
+          <!-- 演示地图(无 API key 时显示) -->
+          <div class="map-demo" id="mapDemo">
+            <div class="map-grid"></div>
+            <div class="map-street s1"></div><div class="map-street s2"></div>
+            <div class="map-street v1"></div><div class="map-street v2"></div>
+            <div class="geofence"></div>
+            <div class="map-pin"><span class="pin-pulse"></span>🐕</div>
+            <div class="map-label home">🏠 Home</div>
+            <div class="map-label park">🌳 Central Park</div>
+            <div class="map-badge" id="mapBadge">Demo map · add an API key in <code>app.js</code> for live Amap / Google</div>
+          </div>
+        </div>
+        <div class="map-info">
+          <div><span class="meta-label">Now</span><span class="meta-val ok">Home · inside fence</span></div>
+          <div><span class="meta-label">Accuracy</span><span class="meta-val">±5 m</span></div>
+          <div><span class="meta-label">Update</span><span class="meta-val">Live</span></div>
+        </div>
+      </section>
+
+      <section class="fence-list">
+        <div class="fence-head"><h3>Geofence radius</h3><span id="radiusVal">200 m</span></div>
+        <input type="range" id="fenceRadius" min="50" max="500" step="10" value="200" class="range">
+        <div class="fence-item"><span class="fence-icon">🏠</span><div><strong>Home</strong><p>Radius 80 m · always on</p></div><span class="switch on"></span></div>
+        <div class="fence-item"><span class="fence-icon">🌳</span><div><strong>Central Park</strong><p>Radius 200 m · walk hours</p></div><span class="switch on"></span></div>
+        <div class="fence-item"><span class="fence-icon">🏖</span><div><strong>Grandma's</strong><p>Radius 100 m · weekend care</p></div><span class="switch"></span></div>
+        <button class="btn-mini btn-wide">+ New fence</button>
+      </section>
+
+      <section class="track-card">
+        <h3>Today's route</h3>
+        <p>3.4 km moved · 52 min outdoors · offline segment auto-synced ✓</p>
+        <button class="btn-mini">Replay route</button>
+      </section>
+    </main>
+
+    <!-- ============ Tab 4: Community ============ -->
+    <main class="screen" id="screen-community">
+      <header class="app-header">
+        <h2>Community</h2>
+        <div class="header-actions"><button class="btn-mini">+ Post</button></div>
+      </header>
+
+      <div class="topic-row">
+        <span class="topic-chip hot">#GuardianMoments</span>
+        <span class="topic-chip">#GuardianOOTD</span>
+        <span class="topic-chip">#CollabUnboxing</span>
+        <span class="topic-chip">#WalkBuddies</span>
+      </div>
+
+      <section class="drop-card" data-overlay="ov-store" role="button">
+        <div class="drop-tag">DROP · 1000 only</div>
+        <h3>STUDIO K × GUARDIAN Vol. 2</h3>
+        <p>"Neon Night-Run" reflective shell · drops in</p>
+        <div class="drop-timer" id="dropTimer">03 : 12 : 44</div>
+      </section>
+
+      <article class="post-card">
+        <div class="post-head"><span class="post-avatar">🦮</span><div><strong>Chestnut's Mom</strong><p>Corgi · 217 days</p></div><span class="post-shell">Wearing: Street Graffiti</span></div>
+        <div class="post-img"><img src="https://placedog.net/600/400?id=66" alt="Corgi outfit" loading="lazy" onerror="this.parentNode.classList.add('img-fallback')"></div>
+        <p class="post-text">New shell day! Three people asked for the link on one walk 😎 #GuardianOOTD</p>
+        <div class="post-actions"><button class="like-btn">❤️ <span>328</span></button><button class="like-btn">💬 <span>46</span></button><button class="like-btn">↗️ Share</button></div>
+      </article>
+
+      <article class="post-card">
+        <div class="post-head"><span class="post-avatar">🐺</span><div><strong>Pidan's Dad</strong><p>Husky · 88 days</p></div><span class="post-shell">Wearing: Midnight Forest</span></div>
+        <div class="post-img"><img src="https://placedog.net/600/400?id=144" alt="Husky" loading="lazy" onerror="this.parentNode.classList.add('img-fallback')"></div>
+        <p class="post-text">Husky jailbreak log: fence alert → live location → recaptured in 7 minutes. The walking group has 6 more Guardians since 😂 #GuardianMoments</p>
+        <div class="post-actions"><button class="like-btn">❤️ <span>1.2k</span></button><button class="like-btn">💬 <span>203</span></button><button class="like-btn">↗️ Share</button></div>
+      </article>
+
+      <article class="post-card">
+        <div class="post-head"><span class="post-avatar">🐩</span><div><strong>Momo</strong><p>Frenchie · 365 days</p></div><span class="post-badge">🏅 One year guarded</span></div>
+        <div class="post-img"><img src="https://placedog.net/600/400?id=199" alt="Frenchie" loading="lazy" onerror="this.parentNode.classList.add('img-fallback')"></div>
+        <p class="post-text">365 days with Guardian today. A whole year, it spoke twice — and both times it mattered. The best guardianship is quiet. #GuardianMoments</p>
+        <div class="post-actions"><button class="like-btn">❤️ <span>2.4k</span></button><button class="like-btn">💬 <span>318</span></button><button class="like-btn">↗️ Share</button></div>
+      </article>
+
+      <section class="rank-card">
+        <h3>This week's walk-buddy board 🏃</h3>
+        <div class="rank-item"><span class="rank-no gold">1</span><span>🐕 Dou Dou & Yihan</span><strong>31.2 km</strong></div>
+        <div class="rank-item"><span class="rank-no">2</span><span>🦮 Chestnut & Mom</span><strong>28.7 km</strong></div>
+        <div class="rank-item"><span class="rank-no">3</span><span>🐺 Pidan & Dad</span><strong>26.4 km</strong></div>
+        <p class="rank-note">Only counts the basic activity data (L1) you choose to share. Opt out anytime.</p>
+      </section>
+    </main>
+
+    <!-- ============ Tab 5: Me ============ -->
+    <main class="screen" id="screen-me">
+      <header class="app-header"><h2>Me</h2></header>
+
+      <section class="pet-profile">
+        <div class="avatar big" data-pet-emoji>🐕</div>
+        <div><h3 data-pet-name>Dou Dou</h3><p data-pet-breed>Corgi · 4 yrs · 12.5 kg</p><p class="pet-meta">217 days guarded · baseline 100% complete</p></div>
+      </section>
+
+      <section class="member-card">
+        <div class="member-head"><span class="badge-plus light">GUARDIAN+</span><span>Annual member</span></div>
+        <p>Valid until Nov 3, 2026 · auto-renew on</p>
+        <div class="member-perks"><span>✓ Vital trends</span><span>✓ Explainable nudges</span><span>✓ Cloud vet</span><span>✓ Monthly report</span><span>✓ Coverage eligibility</span></div>
+      </section>
+
+      <section class="footprint-card">
+        <h3>What we've walked together</h3>
+        <div class="footprint-grid">
+          <div><strong>217</strong><span>days guarded</span></div>
+          <div><strong>412</strong><span>walks</span></div>
+          <div><strong>2</strong><span>key nudges</span></div>
+          <div><strong>47</strong><span>quietly handled</span></div>
+        </div>
+        <p class="footprint-note">Aug 17 is <span data-pet-name>Dou Dou</span>'s birthday — we remember 🎂</p>
+      </section>
+
+      <section class="menu-list">
+        <div class="menu-item" data-overlay="ov-vet"><span>🩺</span><div><strong>Cloud vet</strong><p>Licensed vets online, data attached automatically</p></div><span class="chevron">›</span></div>
+        <div class="menu-item" data-overlay="ov-report"><span>📋</span><div><strong>Health record & reports</strong><p>365-day longitudinal data · export to the clinic</p></div><span class="chevron">›</span></div>
+        <div class="menu-item" data-overlay="ov-insurance"><span>🛡</span><div><strong>Guardian Coverage (UBI)</strong><p>Regular life, lower premium · underwritten by licensed insurers</p></div><span class="chevron">›</span></div>
+        <div class="menu-item" data-overlay="ov-store"><span>🎨</span><div><strong>Shell shop</strong><p>Neon Night-Run collab drops soon</p></div><span class="chevron">›</span></div>
+        <div class="menu-item"><span>🔒</span><div><strong>Data & privacy</strong><p>Three-tier control · export or revoke anytime</p></div><span class="chevron">›</span></div>
+        <div class="menu-item"><span>⌚</span><div><strong>Device</strong><p>GUARDIAN ONE · firmware v2.4.1 · battery 76%</p></div><span class="chevron">›</span></div>
+        <div class="menu-item" id="logoutBtn"><span>👋</span><div><strong>Sign out</strong><p>Back to the login screen</p></div><span class="chevron">›</span></div>
+      </section>
+
+      <p class="app-disclaimer">Guardian provides data records and health nudges, not a medical diagnosis.<br>Consult a licensed vet for diagnosis and treatment. Coverage is underwritten and adjudicated by licensed insurers.</p>
+    </main>
+
+    <!-- ============ Overlay: Alerts ============ -->
+    <section class="overlay" id="ov-alerts">
+      <header class="ov-header"><button class="back-btn">‹</button><h2>Alerts</h2></header>
+      <div class="ov-body">
+        <p class="alerts-philosophy">We only interrupt you when it's worth it.<br>Last 30 days: 2 pushes · 47 silent logs</p>
+
+        <section class="alert-card warn">
+          <div class="alert-top"><span class="alert-tag warn">Worth a look</span><span class="alert-time">Today 2:32 PM</span></div>
+          <h3>A change in <span data-pet-name>Dou Dou</span>'s activity</h3>
+          <p>Activity over the last 48h is 31% below the 30-day average — a first in 90 days.</p>
+          <div class="alert-detail">
+            <h4>Why we're telling you</h4>
+            <ul>
+              <li>Deviation exceeds its own baseline by 2.7 SD</li>
+              <li>Trend held for 2 days, alongside more sleep</li>
+              <li>No similar pattern in history (not seasonal/weather)</li>
+            </ul>
+            <h4>What you can do</h4>
+            <ul>
+              <li>Watch its mood and appetite today</li>
+              <li>If it persists, tap to ask a cloud vet (data auto-attached)</li>
+            </ul>
+            <p class="alert-disclaimer">This is a statistical-deviation note, not a medical diagnosis.</p>
+            <div class="alert-actions"><button class="btn-mini" data-overlay="ov-vet">Ask a cloud vet</button><button class="btn-mini ghost">Mark as seen</button></div>
+          </div>
+          <p class="alert-expand">Tap to expand ▾</p>
+        </section>
+
+        <section class="alert-card ok">
+          <div class="alert-top"><span class="alert-tag ok">Recovered</span><span class="alert-time">May 12</span></div>
+          <h3>Sleep rhythm back within baseline</h3>
+          <p>The 3 prior nights of frequent waking are gone. No further action needed.</p>
+          <div class="alert-detail">
+            <h4>Event recap</h4>
+            <ul>
+              <li>May 8–10: night wake-ups 2.1 SD above baseline</li>
+              <li>Eased from May 11; now 2 normal nights in a row</li>
+            </ul>
+            <p class="alert-disclaimer">Archived to the health record for the vet to reference at check-up.</p>
+          </div>
+          <p class="alert-expand">Tap to expand ▾</p>
+        </section>
+
+        <section class="silent-log">
+          <h3>Silent logs (we didn't bother you)</h3>
+          <div class="silent-item"><span>Single short HR spike · normal post-exercise</span><span class="silent-time">Yesterday</span></div>
+          <div class="silent-item"><span>Sensor noise from a bath · auto-filtered</span><span class="silent-time">3 days ago</span></div>
+          <div class="silent-item"><span>One low-activity day · no trend formed</span><span class="silent-time">5 days ago</span></div>
+          <div class="silent-item"><span>Less afternoon activity in heat · seasonal pattern</span><span class="silent-time">Last week</span></div>
+        </section>
+      </div>
+    </section>
+
+    <!-- ============ Overlay: Cloud Vet ============ -->
+    <section class="overlay" id="ov-vet">
+      <header class="ov-header"><button class="back-btn">‹</button><h2>Cloud vet</h2><span class="vet-status">● Dr. Lee online</span></header>
+      <div class="ov-body chat-body" id="chatBody">
+        <div class="chat-day">Today 2:40 PM</div>
+        <div class="bubble ai">
+          <span class="bubble-who">Guardian Assistant</span>
+          Hi 🐾 I see you came in from the alert. I've pulled together <span data-pet-name>Dou Dou</span>'s last 48 hours — what would you like to ask?
+        </div>
+        <div class="data-chip">
+          <strong>📎 Data summary attached</strong>
+          <p>Activity ↓31% (48h) · sleep +1.2h · temp trend normal · normal activity after meals</p>
+          <span>Authorized for this consult only · vet-visible · revoke anytime</span>
+        </div>
+        <div class="bubble user">She's been less active today and only ate half her food. A bit worried.</div>
+        <div class="bubble ai">
+          <span class="bubble-who">Guardian Assistant</span>
+          Got it. The data does show a sustained drop in activity, so your read matches it. A licensed vet should make the call — I'm connecting Dr. Lee now.
+        </div>
+        <div class="chat-day">Connected · licensed vet (Lic. A1024)</div>
+        <div class="bubble vet">
+          <span class="bubble-who">Dr. Lee · Licensed Vet</span>
+          Hello, I'm Dr. Lee. Looking at the 48h data and your note: lower activity with reduced appetite, but temperature and respiration are steady. <strong>Feed normally tonight and observe; if appetite is still under half by morning, or she stays lethargic, please bring her in.</strong> Ping me anytime tonight.
+        </div>
+        <div class="bubble vet">
+          <span class="bubble-who">Dr. Lee · Licensed Vet</span>
+          And try not to worry — you caught this early, which is exactly the point of continuous data. 😊
+        </div>
+      </div>
+      <div class="chat-input">
+        <input type="text" id="chatInput" placeholder="Describe how she's doing…">
+        <button class="btn-mini" id="chatSend">Send</button>
+      </div>
+      <p class="chat-disclaimer">Online advice is for reference; a licensed in-person exam is the final word.</p>
+    </section>
+
+    <!-- ============ Overlay: Monthly Report ============ -->
+    <section class="overlay" id="ov-report">
+      <header class="ov-header"><button class="back-btn">‹</button><h2>May health report</h2></header>
+      <div class="ov-body">
+        <section class="report-hero">
+          <p class="report-month">May 2026 · <span data-pet-name>Dou Dou</span></p>
+          <h3>No significant baseline drift this month</h3>
+          <p class="report-sub">31 days guarded · data completeness 99.2%</p>
+        </section>
+
+        <section class="tile-row">
+          <div class="tile"><p class="tile-label">Avg sleep</p><p class="tile-num">9.1<span>hrs</span></p><p class="tile-trend up">+3% vs last month</p></div>
+          <div class="tile"><p class="tile-label">Monthly activity</p><p class="tile-num">78<span>pts</span></p><p class="tile-trend">Steady in baseline</p></div>
+        </section>
+        <section class="tile-row">
+          <div class="tile"><p class="tile-label">Walks</p><p class="tile-num">31<span>× · 62km</span></p><p class="tile-trend up">Loves the 7pm slot</p></div>
+          <div class="tile"><p class="tile-label">Nudges</p><p class="tile-num">1<span>push</span></p><p class="tile-trend">12 silent logs</p></div>
+        </section>
+
+        <section class="chart-card">
+          <div class="chart-head"><h3>Monthly activity rhythm</h3><span class="chart-status ok">Healthy & steady</span></div>
+          <svg class="chart" viewBox="0 0 320 120" preserveAspectRatio="none">
+            <path class="band" d="M0,42 C60,38 120,46 180,42 C240,38 280,44 320,40 L320,80 C280,84 240,78 180,82 C120,86 60,78 0,82 Z"/>
+            <polyline class="line" points="0,60 32,54 64,62 96,50 128,58 160,48 192,56 224,46 256,54 288,50 320,52"/>
+          </svg>
+        </section>
+
+        <section class="report-letter">
+          <p>"This month, <span data-pet-name>Dou Dou</span>'s favorite time to zoom was <strong>7:14 PM</strong> — probably, the sound of you opening the door was the best news of her day."</p>
+          <span>— a monthly note from Guardian</span>
+        </section>
+
+        <button class="btn-mini btn-wide">📄 Export vet-readable PDF</button>
+        <p class="app-disclaimer">The report is a data-trend summary, not a medical diagnosis.</p>
+      </div>
+    </section>
+
+    <!-- ============ Overlay: Shell Shop ============ -->
+    <section class="overlay" id="ov-store">
+      <header class="ov-header"><button class="back-btn">‹</button><h2>Shell shop</h2></header>
+      <div class="ov-body">
+        <section class="drop-card store-drop">
+          <div class="drop-tag">DROP · 1000 only</div>
+          <h3>"Neon Night-Run" reflective shell</h3>
+          <p>STUDIO K collab vol. 2 · safer, brighter night walks</p>
+          <div class="drop-timer" id="dropTimer2">03 : 12 : 44</div>
+          <button class="btn-mini">Notify me at drop</button>
+        </section>
+
+        <h3 class="store-title">All shells</h3>
+        <div class="store-grid">
+          <div class="store-item"><div class="store-swatch" style="--c1:#f5e6d3;--c2:#e8b88a"></div><strong>Cream Latte</strong><p>Core line</p><div class="store-price">$12 <span class="member-price">$10 member</span></div></div>
+          <div class="store-item"><div class="store-swatch" style="--c1:#1d2b25;--c2:#3e6b54"></div><strong>Midnight Forest</strong><p>Core · owned ✓</p><div class="store-price">$12 <span class="member-price">$10 member</span></div></div>
+          <div class="store-item"><div class="store-swatch" style="--c1:#f3d1d8;--c2:#e98aa0"></div><strong>Sakura Soda</strong><p>Spring · low stock</p><div class="store-price">$15 <span class="member-price">$12 member</span></div></div>
+          <div class="store-item"><div class="store-swatch" style="--c1:#2b2d42;--c2:#ef8354"></div><strong>Street Graffiti</strong><p>Collab v1 · owned ✓</p><div class="store-price">$19 <span class="sold-out">SOLD OUT</span></div></div>
+          <div class="store-item"><div class="store-swatch" style="--c1:#cfe8f5;--c2:#7db8d9"></div><strong>Glacier Soda</strong><p>Summer · NEW</p><div class="store-price">$15 <span class="member-price">$12 member</span></div></div>
+          <div class="store-item"><div class="store-swatch" style="--c1:#1a1a1a;--c2:#c8ff4d"></div><strong>Neon Night-Run</strong><p>Collab v2 · soon</p><div class="store-price">$19 <span class="member-price">early access</span></div></div>
+        </div>
+
+        <h3 class="store-title">From the community</h3>
+        <div class="ugc-strip">
+          <img src="https://placedog.net/300/300?id=11" alt="UGC" loading="lazy" onerror="this.style.display='none'">
+          <img src="https://placedog.net/300/300?id=27" alt="UGC" loading="lazy" onerror="this.style.display='none'">
+          <img src="https://placedog.net/300/300?id=58" alt="UGC" loading="lazy" onerror="this.style.display='none'">
+          <img src="https://placedog.net/300/300?id=92" alt="UGC" loading="lazy" onerror="this.style.display='none'">
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ Overlay: Coverage (UBI) ============ -->
+    <section class="overlay" id="ov-insurance">
+      <header class="ov-header"><button class="back-btn">‹</button><h2>Guardian Coverage</h2></header>
+      <div class="ov-body">
+        <section class="ubi-hero">
+          <div class="ubi-score">
+            <svg viewBox="0 0 120 120">
+              <circle cx="60" cy="60" r="50" class="ring-bg"/>
+              <circle cx="60" cy="60" r="50" class="ring-fg ubi-ring"/>
+            </svg>
+            <div class="ubi-score-center"><strong>86</strong><span>Guard score</span></div>
+          </div>
+          <div class="ubi-discount">
+            <p class="ubi-label">This month</p>
+            <p class="ubi-price"><s>$6</s> <strong>$4.9</strong><span>/mo</span></p>
+            <p class="ubi-save">A regular life saved you 18%</p>
+          </div>
+        </section>
+
+        <section class="ubi-breakdown">
+          <h3>What makes up the score?<span class="h3-sub">every point explained</span></h3>
+          <div class="ubi-bar"><span>Wear time (96% this month)</span><div class="ubi-track"><div class="ubi-fill" style="width:96%"></div></div></div>
+          <div class="ubi-bar"><span>Activity regularity (steady rhythm)</span><div class="ubi-track"><div class="ubi-fill" style="width:88%"></div></div></div>
+          <div class="ubi-bar"><span>Fence safety record (0 escapes)</span><div class="ubi-track"><div class="ubi-fill" style="width:100%"></div></div></div>
+          <div class="ubi-bar"><span>Regular health-record updates</span><div class="ubi-track"><div class="ubi-fill" style="width:72%"></div></div></div>
+          <p class="chart-note">The score uses only the visible factors above — no black-box rating. Data is shared with the insurer only when you buy or claim.</p>
+        </section>
+
+        <section class="ubi-claim">
+          <h3>Fast claims, data as proof</h3>
+          <div class="claim-steps">
+            <div class="claim-step"><span>1</span><p><strong>Event sensed</strong><br>Impact/accident signal recorded by the device</p></div>
+            <div class="claim-step"><span>2</span><p><strong>Data auto-evidence</strong><br>The relevant window is authorized in one tap — no paperwork runs</p></div>
+            <div class="claim-step"><span>3</span><p><strong>Human review</strong><br>A licensed insurer's adjuster reviews (AI never auto-denies)</p></div>
+            <div class="claim-step"><span>4</span><p><strong>Fast payout</strong><br>Well-evidenced cases settle in hours</p></div>
+          </div>
+        </section>
+
+        <button class="btn-mini btn-wide">View my coverage plan</button>
+        <p class="app-disclaimer">Coverage is underwritten and adjudicated by a licensed insurance partner; Guardian provides the data tech service. Claims are decided by the insurer per policy terms; data is used per-case only with your authorization.</p>
+      </div>
+    </section>
+
+    <!-- ============ Tab bar ============ -->
+    <nav class="tabbar" id="tabbar">
+      <button class="tab active" data-screen="screen-home"><span class="tab-icon">🏠</span>Today</button>
+      <button class="tab" data-screen="screen-health"><span class="tab-icon">📈</span>Health</button>
+      <button class="tab" data-screen="screen-map"><span class="tab-icon">📍</span>Location</button>
+      <button class="tab" data-screen="screen-community"><span class="tab-icon">✨</span>Community</button>
+      <button class="tab" data-screen="screen-me"><span class="tab-icon">👤</span>Me</button>
+    </nav>
+  </div>
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>
