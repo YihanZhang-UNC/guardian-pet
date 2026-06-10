@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Guardian App · 高保真交互原型 v2</title>
+<link rel="stylesheet" href="app.css">
+</head>
+<body>
+
+<div class="stage">
+  <div class="stage-note">
+    <h1>Guardian App 高保真原型 v2</h1>
+    <p>底部 Tab 切换 · 铃铛打开提醒中心 · 快捷入口打开兽医/月报/商店/保障 · 头像旁可切换宠物</p>
+  </div>
+
+  <div class="phone">
+    <div class="phone-notch"></div>
+
+    <!-- ============ Tab 1:今日 ============ -->
+    <main class="screen active" id="screen-home">
+      <header class="app-header">
+        <div>
+          <p class="greet" id="greeting">下午好,禹涵 ☀️</p>
+          <h2><span data-pet-name>豆豆</span> 正在被守护中</h2>
+        </div>
+        <div class="header-actions">
+          <button class="icon-btn" data-overlay="ov-alerts" aria-label="提醒中心">🔔<span class="bell-dot" id="bellDot"></span></button>
+        </div>
+      </header>
+
+      <div class="pet-switch">
+        <button class="pet-chip active" data-pet="豆豆" data-breed="柯基 · 4 岁 · 12.5 kg" data-emoji="🐕">🐕 豆豆</button>
+        <button class="pet-chip" data-pet="年糕" data-breed="柴犬 · 2 岁 · 9.8 kg" data-emoji="🐶">🐶 年糕</button>
+        <button class="pet-chip add">＋</button>
+      </div>
+
+      <section class="guard-card">
+        <div class="guard-ring">
+          <svg viewBox="0 0 120 120">
+            <circle cx="60" cy="60" r="52" class="ring-bg"/>
+            <circle cx="60" cy="60" r="52" class="ring-fg"/>
+          </svg>
+          <div class="guard-ring-center">
+            <span class="guard-status">守护中</span>
+            <span class="guard-sub">一切如常,放心去忙</span>
+          </div>
+        </div>
+        <div class="guard-meta">
+          <div><span class="meta-label">设备状态</span><span class="meta-val ok">● 在线</span></div>
+          <div><span class="meta-label">电量</span><span class="meta-val">76%</span></div>
+          <div><span class="meta-label">最近上报</span><span class="meta-val">2 分钟前</span></div>
+        </div>
+      </section>
+
+      <!-- 守护小贴士(人文关怀) -->
+      <section class="care-card">
+        <span class="care-icon">🌤</span>
+        <div>
+          <strong>今日守护小贴士</strong>
+          <p>今天最高 33°C。<span data-pet-name>豆豆</span>的小短腿离地面更近,建议把散步挪到傍晚,出门前摸摸地面烫不烫手。</p>
+        </div>
+      </section>
+
+      <!-- 快捷入口 -->
+      <section class="quick-grid">
+        <button class="quick" data-overlay="ov-vet"><span>🩺</span>问兽医</button>
+        <button class="quick" data-overlay="ov-report"><span>📊</span>健康月报</button>
+        <button class="quick" data-overlay="ov-store"><span>🎨</span>外壳商店</button>
+        <button class="quick" data-overlay="ov-insurance"><span>🛡</span>守护保障</button>
+      </section>
+
+      <section class="tile-row">
+        <div class="tile">
+          <p class="tile-label">今日活动</p>
+          <p class="tile-num">82<span>分</span></p>
+          <p class="tile-trend up">与近 30 天持平</p>
+          <svg class="spark" viewBox="0 0 100 32" preserveAspectRatio="none"><polyline points="0,24 14,20 28,22 42,12 56,16 70,8 84,12 100,6" /></svg>
+        </div>
+        <div class="tile">
+          <p class="tile-label">静息心率趋势</p>
+          <p class="tile-num">正常<span>区间</span></p>
+          <p class="tile-trend">基于它自己的基准线</p>
+          <svg class="spark" viewBox="0 0 100 32" preserveAspectRatio="none"><polyline points="0,16 14,18 28,14 42,17 56,15 70,16 84,14 100,16" /></svg>
+        </div>
+      </section>
+      <section class="tile-row">
+        <div class="tile">
+          <p class="tile-label">睡眠节律</p>
+          <p class="tile-num">9.2<span>小时</span></p>
+          <p class="tile-trend">昨夜安稳,3 次翻身</p>
+          <svg class="spark" viewBox="0 0 100 32" preserveAspectRatio="none"><polyline points="0,10 14,12 28,9 42,11 56,8 70,12 84,10 100,9" /></svg>
+        </div>
+        <div class="tile">
+          <p class="tile-label">位置</p>
+          <p class="tile-num">家中<span></span></p>
+          <p class="tile-trend ok">围栏内 · 安全</p>
+          <svg class="spark" viewBox="0 0 100 32" preserveAspectRatio="none"><polyline points="0,16 100,16" /></svg>
+        </div>
+      </section>
+
+      <!-- 守护里程碑(人文关怀) -->
+      <section class="milestone-card" data-overlay="ov-report" role="button">
+        <div class="milestone-num">217</div>
+        <div>
+          <strong>陪伴 <span data-pet-name>豆豆</span> 的第 217 天</strong>
+          <p>这期间,我们静默处理了 47 次小波动,只打扰过你 2 次。守护,是一种克制。</p>
+        </div>
+        <span class="chevron">›</span>
+      </section>
+
+      <section class="timeline-card">
+        <h3>今日守护日记 <span class="h3-sub">它的一天,你都在</span></h3>
+        <ul class="timeline">
+          <li><span class="tl-time">07:42</span><span class="tl-dot"></span><span>晨间散步 · 28 分钟 · 1.9 km,今天走了新路线</span></li>
+          <li><span class="tl-time">09:10</span><span class="tl-dot"></span><span>吃完早饭,在老地方晒了会儿太阳</span></li>
+          <li><span class="tl-time">12:30</span><span class="tl-dot"></span><span>午间小睡 · 1.5 小时,睡得很沉</span></li>
+          <li><span class="tl-time">14:05</span><span class="tl-dot"></span><span>客厅撒欢 · 大概是想你了</span></li>
+        </ul>
+      </section>
+    </main>
+
+    <!-- ============ Tab 2:健康 ============ -->
+    <main class="screen" id="screen-health">
+      <header class="app-header">
+        <h2>健康趋势</h2>
+        <div class="header-actions"><span class="badge-plus">GUARDIAN+</span></div>
+      </header>
+
+      <div class="seg-control">
+        <button class="seg active">7 天</button><button class="seg">30 天</button><button class="seg">90 天</button><button class="seg">365 天</button>
+      </div>
+
+      <section class="chart-card">
+        <div class="chart-head"><h3>活动量</h3><span class="chart-status ok">在基准带内</span></div>
+        <svg class="chart" viewBox="0 0 320 120" preserveAspectRatio="none">
+          <path class="band" d="M0,40 C60,36 120,44 180,40 C240,36 280,42 320,38 L320,78 C280,82 240,76 180,80 C120,84 60,76 0,80 Z"/>
+          <polyline class="line" points="0,62 40,56 80,60 120,50 160,58 200,46 240,54 280,48 320,52"/>
+        </svg>
+        <p class="chart-note">灰色区域是<span data-pet-name>豆豆</span>自己的「正常带」——由过去 365 天数据建模生成,不与其他犬只比较。</p>
+      </section>
+
+      <section class="chart-card">
+        <div class="chart-head"><h3>心率变异性 (HRV)</h3><span class="chart-status ok">趋势平稳</span></div>
+        <svg class="chart" viewBox="0 0 320 120" preserveAspectRatio="none">
+          <path class="band" d="M0,44 C80,40 160,48 240,44 C280,42 300,44 320,42 L320,82 C300,84 280,82 240,84 C160,88 80,80 0,84 Z"/>
+          <polyline class="line" points="0,60 40,64 80,58 120,62 160,56 200,60 240,58 280,62 320,58"/>
+        </svg>
+        <p class="chart-note">HRV 反映自主神经状态的长期趋势。我们关注「相对变化」,不提供临床数值解读。</p>
+      </section>
+
+      <section class="chart-card">
+        <div class="chart-head"><h3>体温趋势</h3><span class="chart-status warn">轻度偏离 · 观察中</span></div>
+        <svg class="chart" viewBox="0 0 320 120" preserveAspectRatio="none">
+          <path class="band" d="M0,48 C80,44 160,50 240,46 C280,44 300,46 320,44 L320,80 C300,82 280,80 240,82 C160,86 80,78 0,82 Z"/>
+          <polyline class="line warn" points="0,64 40,62 80,64 120,60 160,58 200,52 240,46 280,42 320,38"/>
+        </svg>
+        <p class="chart-note">近 3 天体表温度趋势缓慢上行,目前在统计阈值内。若持续偏离,系统会提醒你——在那之前,不必担心。</p>
+      </section>
+
+      <section class="chart-card">
+        <div class="chart-head"><h3>呼吸频率(静息)</h3><span class="chart-status ok">在基准带内</span></div>
+        <svg class="chart" viewBox="0 0 320 120" preserveAspectRatio="none">
+          <path class="band" d="M0,46 C80,42 160,50 240,46 C280,44 300,46 320,44 L320,80 C300,82 280,80 240,82 C160,86 80,78 0,82 Z"/>
+          <polyline class="line" points="0,62 40,60 80,64 120,58 160,62 200,60 240,64 280,60 320,62"/>
+        </svg>
+        <p class="chart-note">睡眠时段自动采样。剧烈运动后的短时波动已被算法过滤。</p>
+      </section>
+
+      <section class="report-cta" data-overlay="ov-report" role="button">
+        <div><h3>五月健康月报已生成</h3><p>含基准线变化 · 睡眠质量 · 兽医可读版 PDF</p></div>
+        <button class="btn-mini">查看</button>
+      </section>
+
+      <p class="app-disclaimer">以上为数据趋势记录,不构成医疗诊断。</p>
+    </main>
+
+    <!-- ============ Tab 3:位置 ============ -->
+    <main class="screen" id="screen-map">
+      <header class="app-header"><h2>位置与围栏</h2></header>
+      <section class="map-card">
+        <div class="map-canvas">
+          <div class="map-grid"></div>
+          <div class="geofence"></div>
+          <div class="map-pin"><span class="pin-pulse"></span>🐕</div>
+          <div class="map-label home">🏠 家</div>
+          <div class="map-label park">🌳 中央公园</div>
+        </div>
+        <div class="map-info">
+          <div><span class="meta-label">当前位置</span><span class="meta-val ok">家中 · 围栏内</span></div>
+          <div><span class="meta-label">定位精度</span><span class="meta-val">±5 m</span></div>
+          <div><span class="meta-label">更新</span><span class="meta-val">实时</span></div>
+        </div>
+      </section>
+
+      <section class="fence-list">
+        <h3>电子围栏</h3>
+        <div class="fence-item"><span class="fence-icon">🏠</span><div><strong>家</strong><p>半径 80 m · 始终开启</p></div><span class="switch on"></span></div>
+        <div class="fence-item"><span class="fence-icon">🌳</span><div><strong>中央公园</strong><p>半径 200 m · 遛狗时段</p></div><span class="switch on"></span></div>
+        <div class="fence-item"><span class="fence-icon">🏖</span><div><strong>奶奶家</strong><p>半径 100 m · 周末托管</p></div><span class="switch"></span></div>
+        <button class="btn-mini btn-wide">+ 新建围栏</button>
+      </section>
+
+      <section class="track-card">
+        <h3>今日轨迹</h3>
+        <p>总移动 3.4 km · 户外 52 分钟 · 断网时段数据已自动补传 ✓</p>
+        <button class="btn-mini">回放轨迹</button>
+      </section>
+
+      <section class="care-card">
+        <span class="care-icon">💡</span>
+        <div>
+          <strong>你知道吗</strong>
+          <p>90% 的走失发生在家门口 500 米内。给常去的地方都画上围栏,虚惊也好过错过。</p>
+        </div>
+      </section>
+    </main>
+
+    <!-- ============ Tab 4:社区 ============ -->
+    <main class="screen" id="screen-community">
+      <header class="app-header">
+        <h2>社区</h2>
+        <div class="header-actions"><button class="btn-mini">+ 发布</button></div>
+      </header>
+
+      <div class="topic-row">
+        <span class="topic-chip hot">#我家狗的守护时刻</span>
+        <span class="topic-chip">#GuardianOOTD</span>
+        <span class="topic-chip">#联名开箱</span>
+        <span class="topic-chip">#遛狗搭子</span>
+      </div>
+
+      <!-- 联名 Drop 倒计时(潮流文化) -->
+      <section class="drop-card" data-overlay="ov-store" role="button">
+        <div class="drop-tag">DROP · 限量 1000</div>
+        <h3>STUDIO K × GUARDIAN 第二弹</h3>
+        <p>「霓虹夜跑」反光外壳 · 开售倒计时</p>
+        <div class="drop-timer" id="dropTimer">03 : 12 : 44</div>
+      </section>
+
+      <!-- 动态流 -->
+      <article class="post-card">
+        <div class="post-head"><span class="post-avatar">🦮</span><div><strong>栗子妈</strong><p>柯基 · 守护 217 天</p></div><span class="post-shell">同款:街头涂鸦</span></div>
+        <div class="post-img"><img src="https://placedog.net/600/400?id=66" alt="柯基穿搭" loading="lazy" onerror="this.parentNode.classList.add('img-fallback')"></div>
+        <p class="post-text">新壳到手!遛狗 10 分钟被问了 3 次链接 😎 #GuardianOOTD</p>
+        <div class="post-actions"><button class="like-btn">❤️ <span>328</span></button><button class="like-btn">💬 <span>46</span></button><button class="like-btn">↗️ 分享</button></div>
+      </article>
+
+      <article class="post-card">
+        <div class="post-head"><span class="post-avatar">🐺</span><div><strong>皮蛋他爹</strong><p>哈士奇 · 守护 88 天</p></div><span class="post-shell">同款:午夜森林</span></div>
+        <div class="post-img"><img src="https://placedog.net/600/400?id=144" alt="哈士奇" loading="lazy" onerror="this.parentNode.classList.add('img-fallback')"></div>
+        <p class="post-text">二哈越狱实录:围栏报警 → 实时定位 → 7 分钟抓获归案。从那天起小区群里多了 6 条 Guardian😂 #我家狗的守护时刻</p>
+        <div class="post-actions"><button class="like-btn">❤️ <span>1.2k</span></button><button class="like-btn">💬 <span>203</span></button><button class="like-btn">↗️ 分享</button></div>
+      </article>
+
+      <article class="post-card">
+        <div class="post-head"><span class="post-avatar">🐩</span><div><strong>Momo</strong><p>法斗 · 守护 365 天</p></div><span class="post-badge">🏅 满岁守护</span></div>
+        <div class="post-img"><img src="https://placedog.net/600/400?id=199" alt="法斗" loading="lazy" onerror="this.parentNode.classList.add('img-fallback')"></div>
+        <p class="post-text">今天是 Guardian 陪她的第 365 天。一整年,只响过两次,但那两次都救了急。最好的守护是安静的。#我家狗的守护时刻</p>
+        <div class="post-actions"><button class="like-btn">❤️ <span>2.4k</span></button><button class="like-btn">💬 <span>318</span></button><button class="like-btn">↗️ 分享</button></div>
+      </article>
+
+      <!-- 遛狗排行(轻社交) -->
+      <section class="rank-card">
+        <h3>本周遛狗搭子榜 🏃</h3>
+        <div class="rank-item"><span class="rank-no gold">1</span><span>🐕 豆豆 & 禹涵</span><strong>31.2 km</strong></div>
+        <div class="rank-item"><span class="rank-no">2</span><span>🦮 栗子 & 栗子妈</span><strong>28.7 km</strong></div>
+        <div class="rank-item"><span class="rank-no">3</span><span>🐺 皮蛋 & 皮蛋他爹</span><strong>26.4 km</strong></div>
+        <p class="rank-note">只统计你愿意公开的基础活动数据(L1 级),可随时退出。</p>
+      </section>
+    </main>
+
+    <!-- ============ Tab 5:我的 ============ -->
+    <main class="screen" id="screen-me">
+      <header class="app-header"><h2>我的</h2></header>
+
+      <section class="pet-profile">
+        <div class="avatar big" data-pet-emoji>🐕</div>
+        <div><h3 data-pet-name>豆豆</h3><p data-pet-breed>柯基 · 4 岁 · 12.5 kg</p><p class="pet-meta">已连续守护 217 天 · 基准线完整度 100%</p></div>
+      </section>
+
+      <section class="member-card">
+        <div class="member-head"><span class="badge-plus light">GUARDIAN+</span><span>年度会员</span></div>
+        <p>有效期至 2026 年 11 月 3 日 · 已自动续费</p>
+        <div class="member-perks"><span>✓ 生命体征趋势</span><span>✓ 可解释提醒</span><span>✓ 云端兽医</span><span>✓ 健康月报</span><span>✓ 守护保障资格</span></div>
+      </section>
+
+      <!-- 守护足迹(人文关怀) -->
+      <section class="footprint-card">
+        <h3>我们一起走过的</h3>
+        <div class="footprint-grid">
+          <div><strong>217</strong><span>守护天数</span></div>
+          <div><strong>412</strong><span>次散步</span></div>
+          <div><strong>2</strong><span>次重要提醒</span></div>
+          <div><strong>47</strong><span>次静默化解</span></div>
+        </div>
+        <p class="footprint-note">8 月 17 日是<span data-pet-name>豆豆</span>的生日,我们记得 🎂</p>
+      </section>
+
+      <section class="menu-list">
+        <div class="menu-item" data-overlay="ov-vet"><span>🩺</span><div><strong>云端兽医</strong><p>持牌兽医在线咨询,数据自动随诊</p></div><span class="chevron">›</span></div>
+        <div class="menu-item" data-overlay="ov-report"><span>📋</span><div><strong>健康档案与月报</strong><p>365 天纵向数据 · 可导出给医院</p></div><span class="chevron">›</span></div>
+        <div class="menu-item" data-overlay="ov-insurance"><span>🛡</span><div><strong>守护保障(UBI)</strong><p>规律生活,保费打折 · 持牌保险公司承保</p></div><span class="chevron">›</span></div>
+        <div class="menu-item" data-overlay="ov-store"><span>🎨</span><div><strong>外壳商店</strong><p>霓虹夜跑联名即将开售</p></div><span class="chevron">›</span></div>
+        <div class="menu-item"><span>🔒</span><div><strong>数据与隐私</strong><p>三级分类管理 · 随时导出或撤回授权</p></div><span class="chevron">›</span></div>
+        <div class="menu-item"><span>⌚</span><div><strong>设备管理</strong><p>GUARDIAN ONE · 固件 v2.4.1 · 电量 76%</p></div><span class="chevron">›</span></div>
+        <div class="menu-item"><span>💛</span><div><strong>守护者关怀计划</strong><p>失去毛孩子的家庭,我们想陪你走一段</p></div><span class="chevron">›</span></div>
+      </section>
+
+      <p class="app-disclaimer">Guardian 提供数据记录与健康提醒,不构成医疗诊断。<br>诊断与治疗请咨询持牌兽医。保险服务由合作持牌保险主体承保与理赔。</p>
+    </main>
+
+    <!-- ============ 浮层:提醒中心 ============ -->
+    <section class="overlay" id="ov-alerts">
+      <header class="ov-header"><button class="back-btn">‹</button><h2>提醒中心</h2></header>
+      <div class="ov-body">
+        <p class="alerts-philosophy">我们只在值得的时候打扰你。<br>过去 30 天:推送 2 次 · 静默记录 47 次</p>
+
+        <section class="alert-card warn">
+          <div class="alert-top"><span class="alert-tag warn">建议留意</span><span class="alert-time">今天 14:32</span></div>
+          <h3><span data-pet-name>豆豆</span>的活动量有些变化</h3>
+          <p>过去 48 小时活动量比近 30 天平均下降 31%,为 90 天内首次出现类似变化。</p>
+          <div class="alert-detail">
+            <h4>为什么提醒你?</h4>
+            <ul>
+              <li>偏离幅度超过它自身基准线 2.7 个标准差</li>
+              <li>趋势连续 2 天,且与睡眠时长增加同时出现</li>
+              <li>历史数据中无相似模式(非季节性/天气性波动)</li>
+            </ul>
+            <h4>你可以怎么做?</h4>
+            <ul>
+              <li>今天多观察精神与进食状态</li>
+              <li>如持续,可一键咨询云端兽医(数据将自动附上)</li>
+            </ul>
+            <p class="alert-disclaimer">本提醒为统计学偏离说明,不构成医疗诊断。</p>
+            <div class="alert-actions"><button class="btn-mini" data-overlay="ov-vet">咨询云端兽医</button><button class="btn-mini ghost">标记已知晓</button></div>
+          </div>
+          <p class="alert-expand">点击展开 ▾</p>
+        </section>
+
+        <section class="alert-card ok">
+          <div class="alert-top"><span class="alert-tag ok">已恢复</span><span class="alert-time">5 月 12 日</span></div>
+          <h3>睡眠节律已回到基准带</h3>
+          <p>此前 3 天的夜间频繁起身现象已消失,无需进一步行动。</p>
+          <div class="alert-detail">
+            <h4>事件回顾</h4>
+            <ul>
+              <li>5 月 8-10 日:夜间起身次数高于基准 2.1 个标准差</li>
+              <li>5 月 11 日起逐步回落,现已连续 2 晚正常</li>
+            </ul>
+            <p class="alert-disclaimer">该事件已归档至健康档案,复诊时可供兽医参考。</p>
+          </div>
+          <p class="alert-expand">点击展开 ▾</p>
+        </section>
+
+        <section class="silent-log">
+          <h3>静默记录(未打扰你)</h3>
+          <div class="silent-item"><span>单次心率短时波动 · 运动后正常现象</span><span class="silent-time">昨天</span></div>
+          <div class="silent-item"><span>洗澡导致的传感器噪音 · 已自动过滤</span><span class="silent-time">3 天前</span></div>
+          <div class="silent-item"><span>单日活动量略低 · 未形成趋势</span><span class="silent-time">5 天前</span></div>
+          <div class="silent-item"><span>高温天午后活动减少 · 符合季节模式</span><span class="silent-time">上周</span></div>
+        </section>
+      </div>
+    </section>
+
+    <!-- ============ 浮层:云端兽医 ============ -->
+    <section class="overlay" id="ov-vet">
+      <header class="ov-header"><button class="back-btn">‹</button><h2>云端兽医</h2><span class="vet-status">● 李医生 在线</span></header>
+      <div class="ov-body chat-body" id="chatBody">
+        <div class="chat-day">今天 14:40</div>
+        <div class="bubble ai">
+          <span class="bubble-who">守护助手</span>
+          你好呀 🐾 我注意到你从提醒进来的。我已经把<span data-pet-name>豆豆</span>最近 48 小时的数据整理好了,想咨询点什么?
+        </div>
+        <div class="data-chip">
+          <strong>📎 已自动附上数据摘要</strong>
+          <p>活动量 ↓31%(48h) · 睡眠 +1.2h · 体温趋势正常 · 进食后活动正常</p>
+          <span>仅本次咨询授权,医生可见 · 你可随时撤回</span>
+        </div>
+        <div class="bubble user">它今天不太爱动,饭也只吃了一半,有点担心。</div>
+        <div class="bubble ai">
+          <span class="bubble-who">守护助手</span>
+          收到。数据上看活动量确实有持续下降的趋势,你的观察和数据是对得上的。这类情况建议由专业医生判断——我已为你转接持牌兽医,李医生马上接入。
+        </div>
+        <div class="chat-day">已转接 · 持牌兽医(执业编号 A1024)</div>
+        <div class="bubble vet">
+          <span class="bubble-who">李医生 · 执业兽医</span>
+          你好,我是李医生。看了豆豆的 48 小时数据和你的描述:活动下降伴随食欲减退,但体温和呼吸趋势平稳。建议今晚正常供食并观察,<strong>如果明早进食仍低于平时一半,或精神持续萎靡,请带它面诊</strong>。今晚有变化随时叫我。
+        </div>
+        <div class="bubble vet">
+          <span class="bubble-who">李医生 · 执业兽医</span>
+          另外别太焦虑——你发现得很早,这正是连续数据的意义。😊
+        </div>
+      </div>
+      <div class="chat-input">
+        <input type="text" id="chatInput" placeholder="描述一下它的情况…">
+        <button class="btn-mini" id="chatSend">发送</button>
+      </div>
+      <p class="chat-disclaimer">线上建议仅供参考,最终诊断以持牌兽医面诊为准。</p>
+    </section>
+
+    <!-- ============ 浮层:健康月报 ============ -->
+    <section class="overlay" id="ov-report">
+      <header class="ov-header"><button class="back-btn">‹</button><h2>五月健康月报</h2></header>
+      <div class="ov-body">
+        <section class="report-hero">
+          <p class="report-month">2026 年 5 月 · <span data-pet-name>豆豆</span></p>
+          <h3>本月基准线无显著偏离</h3>
+          <p class="report-sub">31 天连续守护 · 数据完整度 99.2%</p>
+        </section>
+
+        <section class="tile-row">
+          <div class="tile"><p class="tile-label">平均睡眠</p><p class="tile-num">9.1<span>小时</span></p><p class="tile-trend up">较上月 +3%</p></div>
+          <div class="tile"><p class="tile-label">月度活动</p><p class="tile-num">78<span>分</span></p><p class="tile-trend">稳定在基准带</p></div>
+        </section>
+        <section class="tile-row">
+          <div class="tile"><p class="tile-label">散步</p><p class="tile-num">31<span>次 · 62km</span></p><p class="tile-trend up">最爱晚 7 点出门</p></div>
+          <div class="tile"><p class="tile-label">提醒</p><p class="tile-num">1<span>次推送</span></p><p class="tile-trend">12 次静默记录</p></div>
+        </section>
+
+        <section class="chart-card">
+          <div class="chart-head"><h3>月度活动节律</h3><span class="chart-status ok">健康稳定</span></div>
+          <svg class="chart" viewBox="0 0 320 120" preserveAspectRatio="none">
+            <path class="band" d="M0,42 C60,38 120,46 180,42 C240,38 280,44 320,40 L320,80 C280,84 240,78 180,82 C120,86 60,78 0,82 Z"/>
+            <polyline class="line" points="0,60 32,54 64,62 96,50 128,58 160,48 192,56 224,46 256,54 288,50 320,52"/>
+          </svg>
+        </section>
+
+        <!-- 月报寄语(人文关怀) -->
+        <section class="report-letter">
+          <p>"这个月,<span data-pet-name>豆豆</span>最常撒欢的时刻是<strong>晚上 7 点 14 分</strong>——大概,你回家开门的声音,就是它一天里最好的消息。"</p>
+          <span>—— 来自 Guardian 的月度观察</span>
+        </section>
+
+        <button class="btn-mini btn-wide">📄 导出兽医可读版 PDF</button>
+        <p class="app-disclaimer">月报为数据趋势汇总,不构成医疗诊断。</p>
+      </div>
+    </section>
+
+    <!-- ============ 浮层:外壳商店 ============ -->
+    <section class="overlay" id="ov-store">
+      <header class="ov-header"><button class="back-btn">‹</button><h2>外壳商店</h2></header>
+      <div class="ov-body">
+        <section class="drop-card store-drop">
+          <div class="drop-tag">DROP · 限量 1000</div>
+          <h3>「霓虹夜跑」反光外壳</h3>
+          <p>STUDIO K 联名第二弹 · 夜遛更醒目也更安全</p>
+          <div class="drop-timer" id="dropTimer2">03 : 12 : 44</div>
+          <button class="btn-mini">设置开售提醒</button>
+        </section>
+
+        <h3 class="store-title">全部外壳</h3>
+        <div class="store-grid">
+          <div class="store-item"><div class="store-swatch" style="--c1:#f5e6d3;--c2:#e8b88a"></div><strong>奶油拿铁</strong><p>经典常驻</p><div class="store-price">¥79 <span class="member-price">会员 ¥63</span></div></div>
+          <div class="store-item"><div class="store-swatch" style="--c1:#1d2b25;--c2:#3e6b54"></div><strong>午夜森林</strong><p>经典常驻 · 已拥有 ✓</p><div class="store-price">¥79 <span class="member-price">会员 ¥63</span></div></div>
+          <div class="store-item"><div class="store-swatch" style="--c1:#f3d1d8;--c2:#e98aa0"></div><strong>樱花软糖</strong><p>春季限定 · 余量少</p><div class="store-price">¥99 <span class="member-price">会员 ¥79</span></div></div>
+          <div class="store-item"><div class="store-swatch" style="--c1:#2b2d42;--c2:#ef8354"></div><strong>街头涂鸦</strong><p>联名第一弹 · 已拥有 ✓</p><div class="store-price">¥129 <span class="sold-out">绝版</span></div></div>
+          <div class="store-item"><div class="store-swatch" style="--c1:#cfe8f5;--c2:#7db8d9"></div><strong>冰川苏打</strong><p>夏季限定 · NEW</p><div class="store-price">¥99 <span class="member-price">会员 ¥79</span></div></div>
+          <div class="store-item"><div class="store-swatch" style="--c1:#1a1a1a;--c2:#c8ff4d"></div><strong>霓虹夜跑</strong><p>联名第二弹 · 即将开售</p><div class="store-price">¥129 <span class="member-price">会员优先购</span></div></div>
+        </div>
+
+        <h3 class="store-title">大家的买家秀</h3>
+        <div class="ugc-strip">
+          <img src="https://placedog.net/300/300?id=11" alt="买家秀" loading="lazy" onerror="this.style.display='none'">
+          <img src="https://placedog.net/300/300?id=27" alt="买家秀" loading="lazy" onerror="this.style.display='none'">
+          <img src="https://placedog.net/300/300?id=58" alt="买家秀" loading="lazy" onerror="this.style.display='none'">
+          <img src="https://placedog.net/300/300?id=92" alt="买家秀" loading="lazy" onerror="this.style.display='none'">
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 浮层:守护保障 UBI ============ -->
+    <section class="overlay" id="ov-insurance">
+      <header class="ov-header"><button class="back-btn">‹</button><h2>守护保障</h2></header>
+      <div class="ov-body">
+        <section class="ubi-hero">
+          <div class="ubi-score">
+            <svg viewBox="0 0 120 120">
+              <circle cx="60" cy="60" r="50" class="ring-bg"/>
+              <circle cx="60" cy="60" r="50" class="ring-fg ubi-ring"/>
+            </svg>
+            <div class="ubi-score-center"><strong>86</strong><span>守护分</span></div>
+          </div>
+          <div class="ubi-discount">
+            <p class="ubi-label">本月保费</p>
+            <p class="ubi-price"><s>¥39</s> <strong>¥32</strong><span>/月</span></p>
+            <p class="ubi-save">规律生活为你省下 18%</p>
+          </div>
+        </section>
+
+        <section class="ubi-breakdown">
+          <h3>守护分由什么构成?<span class="h3-sub">每一分都可解释</span></h3>
+          <div class="ubi-bar"><span>佩戴时长(本月 96%)</span><div class="ubi-track"><div class="ubi-fill" style="width:96%"></div></div></div>
+          <div class="ubi-bar"><span>活动规律性(节律稳定)</span><div class="ubi-track"><div class="ubi-fill" style="width:88%"></div></div></div>
+          <div class="ubi-bar"><span>围栏安全记录(0 次走失)</span><div class="ubi-track"><div class="ubi-fill" style="width:100%"></div></div></div>
+          <div class="ubi-bar"><span>定期健康档案更新</span><div class="ubi-track"><div class="ubi-fill" style="width:72%"></div></div></div>
+          <p class="chart-note">守护分只基于以上可见维度计算,没有黑箱评级。数据仅在你投保/理赔时授权给保险公司。</p>
+        </section>
+
+        <section class="ubi-claim">
+          <h3>极速理赔,数据作证</h3>
+          <div class="claim-steps">
+            <div class="claim-step"><span>1</span><p><strong>事件感知</strong><br>异常震动/事故信号被设备记录</p></div>
+            <div class="claim-step"><span>2</span><p><strong>数据自动举证</strong><br>相关时段数据一键授权,无需自己跑证明</p></div>
+            <div class="claim-step"><span>3</span><p><strong>人工复核</strong><br>持牌保险公司理赔员复核裁决(绝不由 AI 自动拒赔)</p></div>
+            <div class="claim-step"><span>4</span><p><strong>极速到账</strong><br>证据充分的案件,理赔以小时计</p></div>
+          </div>
+        </section>
+
+        <button class="btn-mini btn-wide">查看我的保障方案</button>
+        <p class="app-disclaimer">保障产品由合作持牌保险公司承保与理赔,Guardian 提供数据技术服务。理赔裁决由保险公司依据条款执行,数据仅在你授权后用于对应案件。</p>
+      </div>
+    </section>
+
+    <!-- ============ 底部 Tab ============ -->
+    <nav class="tabbar">
+      <button class="tab active" data-screen="screen-home"><span class="tab-icon">🏠</span>今日</button>
+      <button class="tab" data-screen="screen-health"><span class="tab-icon">📈</span>健康</button>
+      <button class="tab" data-screen="screen-map"><span class="tab-icon">📍</span>位置</button>
+      <button class="tab" data-screen="screen-community"><span class="tab-icon">✨</span>社区</button>
+      <button class="tab" data-screen="screen-me"><span class="tab-icon">👤</span>我的</button>
+    </nav>
+  </div>
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>

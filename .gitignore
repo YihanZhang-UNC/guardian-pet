@@ -1,0 +1,23 @@
+# ===== 机密资料 · 严禁公开部署 =====
+# 白皮书(Confidential / Founder's Eyes Only)
+*.pdf
+商业战略白皮书*/
+# 内部工程包(BOM、成本、RFQ 等竞争敏感信息)
+hardware/
+# 内部营销 playbook(GTM、投放、CRM 策略)
+marketing/
+# 内部审计
+WHITEPAPER_FIT_AUDIT.md
+
+# ===== 视频工程源文件(仅保留已渲染成片) =====
+launch-video/node_modules/
+launch-video/assets/
+launch-video/*.mp4
+launch-video/draft.mp4
+
+# ===== 系统与杂项 =====
+.DS_Store
+**/.DS_Store
+.Rhistory
+**/.Rhistory
+*.log
