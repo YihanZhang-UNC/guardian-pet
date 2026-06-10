@@ -21,3 +21,6 @@ launch-video/draft.mp4
 .Rhistory
 **/.Rhistory
 *.log
+
+# 根目录成片仅本地保留(部署用 docs/launch-film.mp4)
+/GUARDIAN发布会影片.mp4
