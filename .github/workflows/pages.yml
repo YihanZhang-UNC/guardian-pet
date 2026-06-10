@@ -1,0 +1,45 @@
+name: Deploy GUARDIAN site to GitHub Pages
+
+# 推送到 main(改动 website/ 或 app/)即自动重新部署
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Assemble site
+        run: |
+          mkdir -p _site
+          # 营销官网(含 launch-film.mp4 / launch-poster.jpg / favicon)作为站点根
+          cp -r website/* _site/
+          # App 高保真原型挂到 /app
+          mkdir -p _site/app
+          cp -r app/* _site/app/
+          touch _site/.nojekyll
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
