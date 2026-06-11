@@ -1,0 +1,332 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=1920, height=1080" />
+<script src="assets/gsap.min.js"></script>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { width: 1920px; height: 1080px; overflow: hidden; background: #0c120f; }
+  body { font-family: "PingFang SC", "Hiragino Sans GB", "Noto Sans SC", sans-serif; color: #faf6ef; }
+
+  .scene { position: absolute; inset: 0; overflow: hidden; }
+  .full-img { position: absolute; inset: -80px; width: calc(100% + 160px); height: calc(100% + 160px); object-fit: cover; }
+  .shade { position: absolute; inset: 0; background: linear-gradient(180deg, rgba(12,18,15,.45) 0%, rgba(12,18,15,.16) 42%, rgba(12,18,15,.8) 100%); }
+  .center-stack { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; }
+  .kicker { font-size: 30px; letter-spacing: .5em; text-indent: .5em; font-weight: 700; color: #e8734a; }
+  .headline { font-size: 92px; font-weight: 700; letter-spacing: .06em; line-height: 1.5; }
+  .headline .hl { color: #e8734a; }
+  .subline { font-size: 40px; font-weight: 400; letter-spacing: .1em; color: rgba(250,246,239,.78); }
+  .quietline { font-size: 33px; font-weight: 300; letter-spacing: .12em; color: rgba(250,246,239,.6); }
+
+  /* S1 logo */
+  #s1 { background: radial-gradient(ellipse 62% 50% at 50% 42%, #1d2b25 0%, #0c120f 72%); }
+  #logo-word { font-size: 150px; font-weight: 800; letter-spacing: .22em; text-indent: .22em; }
+  #logo-word .dot { color: #e8734a; }
+  #logo-rule { height: 2px; background: linear-gradient(90deg, transparent, #d8b56c, transparent); margin: 38px auto 34px; width: 460px; }
+  #logo-sub { font-size: 34px; letter-spacing: .42em; text-indent: .42em; color: rgba(250,246,239,.66); font-weight: 300; }
+
+  /* S2 功能亮相 */
+  #s2 { background: radial-gradient(ellipse 60% 60% at 50% 40%, #15231c 0%, #0c120f 76%); }
+  #s2 .center-stack { gap: 30px; }
+  #s2-l1, #s2-l2 { position: absolute; width: 100%; text-align: center; }
+  #feature-reveal { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 26px; }
+  #feature-halo { position: absolute; width: 760px; height: 760px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(232,115,74,.22), rgba(155,140,255,.08) 55%, transparent 72%); }
+  #feature-name { font-size: 148px; font-weight: 800; letter-spacing: .1em; position: relative; }
+  #feature-en { font-size: 34px; letter-spacing: .35em; text-indent: .35em; color: rgba(250,246,239,.55); font-weight: 300; position: relative; }
+
+  /* S3 功能介绍 */
+  #s3 { background: radial-gradient(ellipse 70% 56% at 50% 30%, #15231c 0%, #0c120f 78%); }
+  #s3 .center-stack { gap: 26px; }
+  #chart-reveal { width: 0; overflow: hidden; margin: 30px 0 6px; }
+  #chart-svg { width: 1100px; height: 230px; display: block; }
+  #chart-svg .band { fill: rgba(250,246,239,.09); }
+  #chart-svg .line { fill: none; stroke: #e8734a; stroke-width: 6; stroke-linecap: round; }
+  .chart-tag { font-size: 26px; letter-spacing: .25em; color: #d8b56c; font-weight: 600; }
+  #notif { width: 860px; background: rgba(250,246,239,.97); color: #16201b; border-radius: 26px; padding: 30px 38px; text-align: left; box-shadow: 0 40px 100px rgba(0,0,0,.5); }
+  #notif .n-head { display: flex; align-items: center; gap: 13px; font-size: 22px; color: #6b7670; margin-bottom: 12px; }
+  #notif .n-icon { width: 28px; height: 28px; border-radius: 8px; background: linear-gradient(135deg, #e8734a, #d8b56c); }
+  #notif .n-title { font-size: 30px; font-weight: 700; margin-bottom: 6px; }
+  #notif .n-body { font-size: 24px; color: #45524b; line-height: 1.6; }
+  #restraint { display: flex; gap: 90px; margin-top: 10px; }
+  #restraint .r { display: flex; flex-direction: column; align-items: center; gap: 8px; }
+  #restraint strong { font-size: 84px; font-weight: 800; }
+  #restraint .accent strong { color: #e8734a; }
+  #restraint span { font-size: 24px; letter-spacing: .18em; color: rgba(250,246,239,.62); }
+
+  /* S4 persona */
+  #s4 .center-stack { justify-content: flex-end; padding-bottom: 120px; gap: 34px; }
+  #persona-title { font-size: 40px; letter-spacing: .2em; color: #f3d1a0; font-weight: 600; }
+  #s4 .headline { font-size: 66px; line-height: 1.55; }
+  #s4-cap1, #s4-cap2, #s4-cap3 { position: absolute; width: 100%; left: 0; text-align: center; }
+
+  /* S5 自由 */
+  #s5 .center-stack { justify-content: flex-end; padding-bottom: 130px; gap: 34px; }
+  #s5 .headline { font-size: 96px; }
+  #free-chips { display: flex; gap: 26px; }
+  .chip { font-size: 28px; font-weight: 600; padding: 16px 36px; border-radius: 999px; border: 2px solid rgba(250,246,239,.65); background: rgba(12,18,15,.35); backdrop-filter: blur(4px); }
+
+  /* S6 roadmap */
+  #s6 { background: radial-gradient(ellipse 64% 58% at 50% 34%, #16241d 0%, #0c120f 78%); }
+  #s6 .center-stack { gap: 34px; }
+  #roadmap { display: flex; flex-direction: column; gap: 26px; text-align: left; }
+  .rm { display: flex; align-items: center; gap: 28px; }
+  .rm-time { width: 190px; font-size: 26px; font-weight: 800; letter-spacing: .12em; color: #d8b56c; text-align: right; flex-shrink: 0; }
+  .rm-dot { width: 18px; height: 18px; border-radius: 50%; background: #e8734a; flex-shrink: 0; box-shadow: 0 0 18px rgba(232,115,74,.7); }
+  .rm-text { font-size: 36px; font-weight: 600; }
+  .rm-text small { display: block; font-size: 23px; font-weight: 300; color: rgba(250,246,239,.6); margin-top: 4px; }
+
+  /* S7 定位与人群 */
+  #s7 { background: radial-gradient(ellipse 70% 56% at 50% 30%, #15231c 0%, #0c120f 78%); }
+  #s7 .center-stack { gap: 34px; }
+  #s7-l1, #s7-l2 { position: absolute; width: 100%; text-align: center; }
+  #persona-cards { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; gap: 40px; }
+  .pcard { width: 420px; background: rgba(250,246,239,.06); border: 1px solid rgba(250,246,239,.16); border-radius: 28px; padding: 46px 38px; text-align: center; }
+  .pcard .pc-icon { font-size: 64px; margin-bottom: 20px; }
+  .pcard h3 { font-size: 36px; margin-bottom: 14px; }
+  .pcard p { font-size: 24px; color: rgba(250,246,239,.65); line-height: 1.7; }
+
+  /* S8 愿景 */
+  #s8 { background: #0c120f; }
+  #net-dots { position: absolute; inset: 0; opacity: .5;
+    background-image: radial-gradient(rgba(232,115,74,.55) 2.5px, transparent 2.5px), radial-gradient(rgba(216,181,108,.4) 2px, transparent 2px);
+    background-size: 170px 170px, 230px 230px; background-position: 0 0, 80px 110px; }
+  #s8 .center-stack { gap: 42px; }
+  #s8 .headline { font-size: 76px; }
+
+  /* S9 结尾 */
+  #s9 { background: #0c120f; }
+  #s9 .center-stack > * { position: absolute; }
+  #s9 .headline { font-size: 100px; line-height: 1.6; }
+  #end-logo { font-size: 130px; font-weight: 800; letter-spacing: .22em; text-indent: .22em; }
+  #end-logo .dot { color: #e8734a; }
+  #end-slogan { font-size: 46px; letter-spacing: .24em; color: rgba(250,246,239,.85); font-weight: 300; margin-top: 46px; }
+  #s9-final { display: flex; flex-direction: column; align-items: center; }
+</style>
+</head>
+<body>
+<div id="root" data-composition-id="main" data-start="0" data-duration="150" data-width="1920" data-height="1080">
+
+  <audio id="score" class="clip" data-start="0" data-duration="150" data-track-index="0" data-volume="0.9" src="assets/score2.wav"></audio>
+
+  <!-- S1 · Logo 0-8 -->
+  <div id="s1" class="scene clip" data-start="0" data-duration="8" data-track-index="1">
+    <div class="center-stack">
+      <div id="logo-word">GUARDIAN<span class="dot">.</span></div>
+      <div id="logo-rule"></div>
+      <div id="logo-sub">GUARDIAN+ 健 康 · 功 能 发 布</div>
+    </div>
+  </div>
+
+  <!-- S2 · 引入与功能亮相 7.6-25 -->
+  <div id="s2" class="scene clip" data-start="7.6" data-duration="17.4" data-track-index="2">
+    <div class="headline" id="s2-l1" style="top:42%">每一只狗的「正常」,<br>都不一样。</div>
+    <div class="subline" id="s2-l2" style="top:64%">可长久以来,我们都在用同一把尺子衡量它们。</div>
+    <div id="feature-reveal">
+      <div id="feature-halo"></div>
+      <div class="kicker" id="feature-kicker">GUARDIAN+ 全新功能</div>
+      <div id="feature-name">基准线引擎</div>
+      <div id="feature-en">INDIVIDUAL BASELINE ENGINE</div>
+    </div>
+  </div>
+
+  <!-- S3 · 功能介绍 24.6-48 -->
+  <div id="s3" class="scene clip" data-start="24.6" data-duration="23.4" data-track-index="1">
+    <div class="center-stack">
+      <div class="headline" id="s3-head" style="font-size:72px">认识它自己的「正常」。</div>
+      <div class="chart-tag" id="s3-tag">365 天 · 连续建模 · 只和它自己比</div>
+      <div id="chart-reveal">
+        <svg id="chart-svg" viewBox="0 0 1100 230" preserveAspectRatio="none">
+          <path class="band" d="M0,72 C180,62 360,86 550,74 C740,62 920,80 1100,68 L1100,156 C920,168 740,150 550,162 C360,174 180,148 0,160 Z"/>
+          <polyline class="line" points="0,126 110,112 220,122 330,102 440,116 550,94 660,110 770,90 880,106 990,96 1100,102"/>
+        </svg>
+      </div>
+      <div id="notif">
+        <div class="n-head"><div class="n-icon"></div>Guardian · 现在</div>
+        <div class="n-title">墩墩的活动量有些变化</div>
+        <div class="n-body">过去 48 小时活动量比近 30 天平均下降 31%,为 90 天内首次。建议今天多留意,如持续可咨询兽医。</div>
+      </div>
+      <div id="restraint">
+        <div class="r"><strong>30</strong><span>天</span></div>
+        <div class="r accent"><strong>2</strong><span>次提醒</span></div>
+        <div class="r"><strong>47</strong><span>次静默化解</span></div>
+      </div>
+      <div class="quietline" id="s3-foot">提醒 ≠ 诊断。判断,永远属于持牌兽医。</div>
+    </div>
+  </div>
+
+  <!-- S4 · 杭州小朱 47.6-70 -->
+  <div id="s4" class="scene clip" data-start="47.6" data-duration="22.4" data-track-index="2">
+    <img class="full-img" id="s4-img" src="assets/corgi-walk.jpg" alt="">
+    <div class="shade"></div>
+    <div class="center-stack">
+      <div id="persona-title">杭州 · 小朱 × 柯基「墩墩」</div>
+      <div class="headline" id="s4-cap1" style="bottom:240px">28 岁,产品经理。<br>工作日的白天,家里只有墩墩自己。</div>
+      <div class="headline" id="s4-cap2" style="bottom:240px">守护第 143 天,Guardian 第一次开口:<br>「48 小时活动量,下降了 <span class="hl">31%</span>。」</div>
+      <div class="headline" id="s4-cap3" style="bottom:240px">兽医检查后,只说了四个字:<br>「<span class="hl">来得挺及时</span>。」</div>
+    </div>
+  </div>
+
+  <!-- S5 · 更好与自由 69.6-88 -->
+  <div id="s5" class="scene clip" data-start="69.6" data-duration="18.4" data-track-index="1">
+    <img class="full-img" id="s5-img" src="assets/corgi-beach.jpg" alt="">
+    <div class="shade"></div>
+    <div class="center-stack">
+      <div class="subline" id="s5-l1">现在的小朱,依然加班、依然出差。</div>
+      <div class="subline" id="s5-l2">只是不再整夜地猜,它好不好。</div>
+      <div class="headline" id="s5-l3">它<span class="hl">自由</span>,你也<span class="hl">自由</span>。</div>
+      <div id="free-chips">
+        <div class="chip" id="fc1">安心加班</div>
+        <div class="chip" id="fc2">放心出差</div>
+        <div class="chip" id="fc3">敢让它撒欢</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- S6 · 实现走向 87.6-106 -->
+  <div id="s6" class="scene clip" data-start="87.6" data-duration="18.4" data-track-index="2">
+    <div class="center-stack">
+      <div class="headline" id="s6-head" style="font-size:78px">这,只是开始。</div>
+      <div id="roadmap">
+        <div class="rm" id="rm1"><div class="rm-time">现在</div><div class="rm-dot"></div><div class="rm-text">趋势提醒 · 个体基准线<small>已随 GUARDIAN+ 上线</small></div></div>
+        <div class="rm" id="rm2"><div class="rm-time">接下来</div><div class="rm-dot"></div><div class="rm-text">云端兽医 · 数据随诊<small>提醒之后,有人接住</small></div></div>
+        <div class="rm" id="rm3"><div class="rm-time">然后</div><div class="rm-dot"></div><div class="rm-text">健康月报 · 静息呼吸趋势<small>复诊时,带上它的 365 天</small></div></div>
+        <div class="rm" id="rm4"><div class="rm-time">未来</div><div class="rm-dot"></div><div class="rm-text">守护保障 · 慢病管理<small>规律生活,保费打折</small></div></div>
+      </div>
+      <div class="quietline" id="s6-foot">每一步,都守住同一条边界:提醒 ≠ 诊断。</div>
+    </div>
+  </div>
+
+  <!-- S7 · 市场定位与人群 105.6-122 -->
+  <div id="s7" class="scene clip" data-start="105.6" data-duration="16.4" data-track-index="1">
+    <div class="headline" id="s7-l1" style="top:40%">它不是定位器,<br>也不是医疗器械。</div>
+    <div class="headline" id="s7-l2" style="top:38%;font-size:76px">它是中间那个一直缺席的角色:<br><span class="hl">风险管理的闭环</span>。</div>
+    <div id="persona-cards">
+      <div class="pcard" id="pc1"><div class="pc-icon">🛹</div><h3>潮流玩家</h3><p>先被颜值种草,<br>后被守护留下</p></div>
+      <div class="pcard" id="pc2"><div class="pc-icon">💼</div><h3>牵挂的上班族</h3><p>上班 8 小时,<br>不再靠猜</p></div>
+      <div class="pcard" id="pc3"><div class="pc-icon">🐾</div><h3>老龄犬家庭</h3><p>慢性变化,<br>最怕发现太晚</p></div>
+    </div>
+  </div>
+
+  <!-- S8 · 未来愿景 121.6-135 -->
+  <div id="s8" class="scene clip" data-start="121.6" data-duration="13.4" data-track-index="2">
+    <div id="net-dots"></div>
+    <div class="center-stack">
+      <div class="headline" id="s8-l1">每一只佩戴 Guardian 的狗,<br>都是网络的一个节点。</div>
+      <div class="subline" id="s8-l2">数据越多,提醒越准,守护越安静。</div>
+      <div class="quietline" id="s8-l3">而 AI,永远不做诊断。</div>
+    </div>
+  </div>
+
+  <!-- S9 · 结尾 134.6-150 -->
+  <div id="s9" class="scene clip" data-start="134.6" data-duration="15.4" data-track-index="1">
+    <div class="center-stack">
+      <div class="headline" id="s9-l1">不是和别的狗比,<br>是和昨天的<span class="hl">它自己</span>比。</div>
+      <div id="s9-final">
+        <div id="end-logo">GUARDIAN<span class="dot">.</span></div>
+        <div id="end-slogan">它自由,你也自由。</div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+window.__timelines = window.__timelines || {};
+const tl = gsap.timeline({ paused: true });
+const EASE = "power2.out";
+
+/* S1 Logo 0-8 */
+tl.fromTo("#logo-word", { opacity: 0, scale: 0.94 }, { opacity: 1, scale: 1, duration: 1.6, ease: EASE }, 0.7);
+tl.fromTo("#logo-rule", { width: 0, opacity: 0 }, { width: 460, opacity: 1, duration: 1.2, ease: EASE }, 1.9);
+tl.fromTo("#logo-sub", { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 1.1, ease: EASE }, 2.5);
+tl.to("#s1 .center-stack", { opacity: 0, scale: 1.03, duration: 1.0, ease: "power2.in" }, 6.8);
+
+/* S2 引入与功能亮相 7.6-25 */
+tl.fromTo("#s2", { opacity: 0 }, { opacity: 1, duration: 1.0 }, 7.7);
+tl.fromTo("#s2-l1", { opacity: 0, y: 34 }, { opacity: 1, y: 0, duration: 1.3, ease: EASE }, 9.0);
+tl.fromTo("#s2-l2", { opacity: 0, y: 28 }, { opacity: 1, y: 0, duration: 1.2, ease: EASE }, 12.4);
+tl.to("#s2-l1", { opacity: 0, y: -20, duration: 0.9, ease: "power2.in" }, 15.6);
+tl.to("#s2-l2", { opacity: 0, y: -20, duration: 0.9, ease: "power2.in" }, 15.7);
+tl.fromTo("#feature-halo", { opacity: 0, scale: 0.5 }, { opacity: 1, scale: 1, duration: 2.2, ease: EASE }, 16.6);
+tl.fromTo("#feature-kicker", { opacity: 0, y: 26 }, { opacity: 1, y: 0, duration: 1.0, ease: EASE }, 17.2);
+tl.fromTo("#feature-name", { opacity: 0, scale: 0.92, y: 22 }, { opacity: 1, scale: 1, y: 0, duration: 1.5, ease: "power3.out" }, 17.8);
+tl.fromTo("#feature-en", { opacity: 0, y: 18 }, { opacity: 1, y: 0, duration: 1.1, ease: EASE }, 18.9);
+tl.to("#feature-halo", { scale: 1.08, duration: 2.4, repeat: 1, yoyo: true, ease: "sine.inOut" }, 19.4);
+tl.to("#s2", { opacity: 0, duration: 1.1 }, 23.8);
+
+/* S3 功能介绍 24.6-48 */
+tl.fromTo("#s3", { opacity: 0 }, { opacity: 1, duration: 1.0 }, 24.7);
+tl.fromTo("#s3-head", { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 1.2, ease: EASE }, 25.7);
+tl.fromTo("#s3-tag", { opacity: 0, y: 22 }, { opacity: 1, y: 0, duration: 1.0, ease: EASE }, 27.0);
+tl.to("#chart-reveal", { width: 1100, duration: 3.2, ease: "power1.inOut" }, 28.2);
+tl.fromTo("#notif", { opacity: 0, y: 60, scale: 0.95 }, { opacity: 1, y: 0, scale: 1, duration: 1.1, ease: "power3.out" }, 33.4);
+tl.fromTo("#restraint .r:nth-child(1)", { opacity: 0, y: 36 }, { opacity: 1, y: 0, duration: 0.9, ease: EASE }, 39.4);
+tl.fromTo("#restraint .r:nth-child(2)", { opacity: 0, y: 36 }, { opacity: 1, y: 0, duration: 0.9, ease: EASE }, 40.1);
+tl.fromTo("#restraint .r:nth-child(3)", { opacity: 0, y: 36 }, { opacity: 1, y: 0, duration: 0.9, ease: EASE }, 40.8);
+tl.fromTo("#s3-foot", { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 1.1, ease: EASE }, 43.2);
+tl.to("#s3", { opacity: 0, duration: 1.1 }, 46.8);
+
+/* S4 杭州小朱 47.6-70 */
+tl.fromTo("#s4", { opacity: 0 }, { opacity: 1, duration: 1.2 }, 47.7);
+tl.fromTo("#s4-img", { scale: 1.04 }, { scale: 1.13, duration: 22.4, ease: "none" }, 47.6);
+tl.fromTo("#persona-title", { opacity: 0, y: 26 }, { opacity: 1, y: 0, duration: 1.1, ease: EASE }, 49.0);
+tl.fromTo("#s4-cap1", { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 1.2, ease: EASE }, 51.4);
+tl.to("#s4-cap1", { opacity: 0, y: -16, duration: 0.8, ease: "power2.in" }, 56.2);
+tl.fromTo("#s4-cap2", { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 1.2, ease: EASE }, 57.2);
+tl.to("#s4-cap2", { opacity: 0, y: -16, duration: 0.8, ease: "power2.in" }, 62.2);
+tl.fromTo("#s4-cap3", { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 1.3, ease: EASE }, 63.2);
+tl.to("#s4", { opacity: 0, duration: 1.1 }, 68.8);
+
+/* S5 自由 69.6-88 */
+tl.fromTo("#s5", { opacity: 0 }, { opacity: 1, duration: 1.2 }, 69.7);
+tl.fromTo("#s5-img", { scale: 1.12 }, { scale: 1.03, duration: 18.4, ease: "none" }, 69.6);
+tl.fromTo("#s5-l1", { opacity: 0, y: 28 }, { opacity: 1, y: 0, duration: 1.2, ease: EASE }, 71.2);
+tl.fromTo("#s5-l2", { opacity: 0, y: 28 }, { opacity: 1, y: 0, duration: 1.2, ease: EASE }, 74.4);
+tl.fromTo("#s5-l3", { opacity: 0, y: 32, scale: 0.97 }, { opacity: 1, y: 0, scale: 1, duration: 1.4, ease: EASE }, 78.0);
+tl.fromTo("#fc1", { opacity: 0, y: 40 }, { opacity: 1, y: 0, duration: 0.8, ease: "power3.out" }, 81.6);
+tl.fromTo("#fc2", { opacity: 0, y: 40 }, { opacity: 1, y: 0, duration: 0.8, ease: "power3.out" }, 82.0);
+tl.fromTo("#fc3", { opacity: 0, y: 40 }, { opacity: 1, y: 0, duration: 0.8, ease: "power3.out" }, 82.4);
+tl.to("#s5", { opacity: 0, duration: 1.1 }, 86.8);
+
+/* S6 实现走向 87.6-106 */
+tl.fromTo("#s6", { opacity: 0 }, { opacity: 1, duration: 1.0 }, 87.7);
+tl.fromTo("#s6-head", { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 1.2, ease: EASE }, 88.8);
+tl.fromTo("#rm1", { opacity: 0, x: -50 }, { opacity: 1, x: 0, duration: 0.9, ease: "power3.out" }, 90.8);
+tl.fromTo("#rm2", { opacity: 0, x: -50 }, { opacity: 1, x: 0, duration: 0.9, ease: "power3.out" }, 93.2);
+tl.fromTo("#rm3", { opacity: 0, x: -50 }, { opacity: 1, x: 0, duration: 0.9, ease: "power3.out" }, 95.6);
+tl.fromTo("#rm4", { opacity: 0, x: -50 }, { opacity: 1, x: 0, duration: 0.9, ease: "power3.out" }, 98.0);
+tl.fromTo("#s6-foot", { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 1.1, ease: EASE }, 100.8);
+tl.to("#s6", { opacity: 0, duration: 1.1 }, 104.8);
+
+/* S7 定位与人群 105.6-122 */
+tl.fromTo("#s7", { opacity: 0 }, { opacity: 1, duration: 1.0 }, 105.7);
+tl.fromTo("#s7-l1", { opacity: 0, y: 28 }, { opacity: 1, y: 0, duration: 1.3, ease: EASE }, 106.8);
+tl.to("#s7-l1", { opacity: 0, y: -18, duration: 0.9, ease: "power2.in" }, 109.8);
+tl.fromTo("#s7-l2", { opacity: 0, y: 28 }, { opacity: 1, y: 0, duration: 1.3, ease: EASE }, 110.8);
+tl.to("#s7-l2", { opacity: 0, y: -18, duration: 0.9, ease: "power2.in" }, 113.8);
+tl.fromTo("#pc1", { opacity: 0, y: 70 }, { opacity: 1, y: 0, duration: 1.0, ease: "power3.out" }, 114.8);
+tl.fromTo("#pc2", { opacity: 0, y: 70 }, { opacity: 1, y: 0, duration: 1.0, ease: "power3.out" }, 115.3);
+tl.fromTo("#pc3", { opacity: 0, y: 70 }, { opacity: 1, y: 0, duration: 1.0, ease: "power3.out" }, 115.8);
+tl.to("#s7", { opacity: 0, duration: 1.1 }, 120.8);
+
+/* S8 愿景 121.6-135 */
+tl.fromTo("#s8", { opacity: 0 }, { opacity: 1, duration: 1.2 }, 121.7);
+tl.fromTo("#net-dots", { opacity: 0 }, { opacity: 0.5, duration: 2.4 }, 121.7);
+tl.fromTo("#s8-l1", { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 1.3, ease: EASE }, 123.0);
+tl.fromTo("#s8-l2", { opacity: 0, y: 26 }, { opacity: 1, y: 0, duration: 1.2, ease: EASE }, 126.6);
+tl.fromTo("#s8-l3", { opacity: 0, y: 22 }, { opacity: 1, y: 0, duration: 1.2, ease: EASE }, 129.8);
+tl.to("#s8", { opacity: 0, duration: 1.1 }, 133.8);
+
+/* S9 结尾 134.6-150 */
+tl.fromTo("#s9-l1", { opacity: 0, y: 28 }, { opacity: 1, y: 0, duration: 1.5, ease: EASE }, 136.0);
+tl.to("#s9-l1", { opacity: 0, y: -18, duration: 1.0, ease: "power2.in" }, 141.2);
+tl.fromTo("#s9-final", { opacity: 0, scale: 0.96 }, { opacity: 1, scale: 1, duration: 1.6, ease: EASE }, 142.6);
+tl.fromTo("#end-slogan", { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 1.2, ease: EASE }, 143.9);
+tl.to("#s9 .center-stack", { opacity: 0, duration: 1.3, ease: "power2.in" }, 148.4);
+
+window.__timelines["main"] = tl;
+</script>
+</body>
+</html>
