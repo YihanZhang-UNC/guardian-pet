@@ -233,13 +233,14 @@ em { font-style: normal; color: var(--accent); }
 
 /* ---- 对比表 ---- */
 .compare-wrap { overflow-x: auto; border-radius: var(--radius); box-shadow: var(--shadow); }
-.compare { width: 100%; border-collapse: collapse; background: #fff; min-width: 760px; }
+.compare { width: 100%; border-collapse: collapse; background: #fff; min-width: 760px; color: var(--ink); }
 .compare th, .compare td { padding: 18px 20px; text-align: left; font-size: 14.5px; border-bottom: 1px solid rgba(0,0,0,.06); vertical-align: top; }
 .compare thead th { background: var(--forest); color: var(--cream); font-size: 14px; }
 .compare thead th.hl { background: var(--accent); }
 .compare td.hl { background: rgba(232,115,74,.07); font-weight: 700; }
 .compare td:first-child { font-weight: 700; white-space: nowrap; }
 .compare .dim { color: var(--ink-soft); font-weight: 400; }
+.compare thead .dim { color: rgba(250,246,239,.65); }
 
 /* ---- 价值支柱 ---- */
 .pillar-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 24px; }
