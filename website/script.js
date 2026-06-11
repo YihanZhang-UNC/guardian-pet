@@ -65,3 +65,28 @@ if (leadForm) {
     document.getElementById('formOk').style.display = 'block';
   });
 }
+
+// ===== 全站图片预热:本页加载完后,空闲时把其它页面的图片提前拉进缓存 =====
+(() => {
+  const ALL_IMAGES = [
+    // 首页
+    'launch-poster.jpg', 'img/dog-5.jpg', 'img/dog-39.jpg', 'img/dog-139.jpg', 'img/dog-82.jpg',
+    // 产品页
+    'feature-poster.jpg', 'img/dog-101.jpg', 'img/dog-120.jpg', 'img/dog-77.jpg', 'img/dog-212.jpg',
+    'img/dog-33.jpg', 'img/dog-145.jpg', 'img/dog-88.jpg', 'img/dog-167.jpg', 'img/dog-191.jpg', 'img/dog-54.jpg',
+    // 为什么是我们
+    'img/dog-23.jpg', 'img/dog-63.jpg', 'img/dog-178.jpg',
+    // 商务与投资
+    'img/dog-247.jpg',
+  ];
+  const warm = () => {
+    ALL_IMAGES.forEach(src => { const im = new Image(); im.decoding = 'async'; im.src = src; });
+  };
+  if (document.readyState === 'complete') {
+    ('requestIdleCallback' in window) ? requestIdleCallback(warm, { timeout: 3000 }) : setTimeout(warm, 800);
+  } else {
+    window.addEventListener('load', () => {
+      ('requestIdleCallback' in window) ? requestIdleCallback(warm, { timeout: 3000 }) : setTimeout(warm, 800);
+    }, { once: true });
+  }
+})();

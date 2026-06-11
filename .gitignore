@@ -25,3 +25,6 @@ launch-video/draft.mp4
 # 根目录成片仅本地保留(部署用 docs/launch-film.mp4)
 /GUARDIAN发布会影片.mp4
 /GUARDIAN功能发布影片.mp4
+
+# 内部进度总结,不公开
+PROJECT_COMPLETION_SUMMARY.md

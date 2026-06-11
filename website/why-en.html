@@ -7,6 +7,9 @@
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
 <meta name="description" content="Pets can't speak; an owner's deepest anxiety is uncertainty. GUARDIAN turns it into certainty with all-day continuous data, an individual baseline and explainable nudges — a full loop from monitoring to professional care.">
 <link rel="stylesheet" href="style.css">
+<link rel="preload" as="image" href="img/dog-23.jpg">
+<link rel="preload" as="image" href="img/dog-63.jpg">
+<link rel="preload" as="image" href="img/dog-178.jpg">
 </head>
 <body>
 
@@ -45,7 +48,7 @@
   </div>
   <div class="need-grid">
     <div class="need-card reveal">
-      <img src="https://placedog.net/640/360?id=23" alt="Dog at the door" loading="lazy" onerror="this.style.display='none'">
+      <img src="img/dog-23.jpg" alt="Dog at the door" loading="eager" fetchpriority="high" onerror="this.style.display='none'">
       <div class="need-body">
         <span class="need-tag">Moment 01</span>
         <h3>"Did it slip out again?"</h3>
@@ -54,7 +57,7 @@
       </div>
     </div>
     <div class="need-card reveal delay-1">
-      <img src="https://placedog.net/640/360?id=63" alt="Dog home alone" loading="lazy" onerror="this.style.display='none'">
+      <img src="img/dog-63.jpg" alt="Dog home alone" loading="eager" fetchpriority="high" onerror="this.style.display='none'">
       <div class="need-body">
         <span class="need-tag">Moment 02</span>
         <h3>"For my 8 hours at work, what's it doing?"</h3>
@@ -63,7 +66,7 @@
       </div>
     </div>
     <div class="need-card reveal delay-2">
-      <img src="https://placedog.net/640/360?id=178" alt="Sleeping senior dog" loading="lazy" onerror="this.style.display='none'">
+      <img src="img/dog-178.jpg" alt="Sleeping senior dog" loading="eager" fetchpriority="high" onerror="this.style.display='none'">
       <div class="need-body">
         <span class="need-tag">Moment 03</span>
         <h3>"When we find out, will it be too late?"</h3>
