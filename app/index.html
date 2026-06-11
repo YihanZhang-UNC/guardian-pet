@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=1.0, user-scalable=no">
 <title>Guardian App · 高保真交互原型 v2</title>
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
 <link rel="stylesheet" href="app.css">
@@ -12,11 +12,61 @@
 <div class="stage">
   <div class="stage-note">
     <h1>Guardian App 高保真原型 v2</h1>
-    <p>底部 Tab 切换 · 铃铛打开提醒中心 · 快捷入口打开兽医/月报/商店/保障 · 头像旁可切换宠物</p>
+    <p>免密登录 · 底部 Tab 切换 · 铃铛打开提醒中心 · 快捷入口打开兽医/月报/商店/保障 · 位置页支持高德/Google 实景地图</p>
   </div>
 
-  <div class="phone">
+  <div class="phone" id="phone">
     <div class="phone-notch"></div>
+
+    <!-- ============ 登录 ============ -->
+    <section class="login" id="login">
+      <div class="login-mesh"></div>
+      <div class="login-top">
+        <div class="login-logo">GUARDIAN<span>.</span></div>
+        <p class="login-tag">好看,只是它的开始。</p>
+      </div>
+      <div class="login-hero">
+        <div class="login-ring"><div class="login-orb"></div><span>🐶</span></div>
+      </div>
+      <div class="login-sheet">
+        <h2>欢迎回来,守护者</h2>
+        <p class="login-sub">不需要密码。只有你,和那个不会说话的家人。</p>
+
+        <div class="login-methods" id="loginMethods">
+          <button class="auth-btn google" data-auth="Google">
+            <span class="auth-ic"><svg viewBox="0 0 24 24" width="20" height="20"><path fill="#EA4335" d="M12 10.2v3.9h5.4c-.24 1.4-1.66 4.1-5.4 4.1-3.25 0-5.9-2.7-5.9-6s2.65-6 5.9-6c1.85 0 3.1.78 3.8 1.45l2.6-2.5C16.7 1.6 14.6.7 12 .7 6.9.7 2.8 4.8 2.8 10s4.1 9.3 9.2 9.3c5.3 0 8.8-3.7 8.8-8.95 0-.6-.07-1.05-.15-1.5H12z"/></svg></span>
+            使用 Google 继续
+          </button>
+          <button class="auth-btn wechat" data-auth="WeChat">
+            <span class="auth-ic">💬</span>
+            微信一键登录
+          </button>
+          <button class="auth-btn email" data-auth="Email" id="emailToggle">
+            <span class="auth-ic">✉️</span>
+            邮箱验证码登录
+          </button>
+        </div>
+
+        <div class="email-flow" id="emailFlow">
+          <div class="email-step" id="emailStep1">
+            <input type="email" id="emailInput" placeholder="you@example.com" autocomplete="email">
+            <button class="auth-btn primary" id="sendCode">发送登录验证码</button>
+            <button class="link-back" data-back="methods">← 其他登录方式</button>
+          </div>
+          <div class="email-step" id="emailStep2" hidden>
+            <p class="otp-hint">验证码已发送至 <strong id="emailEcho"></strong></p>
+            <div class="otp-row">
+              <input class="otp" maxlength="1" inputmode="numeric"><input class="otp" maxlength="1" inputmode="numeric"><input class="otp" maxlength="1" inputmode="numeric"><input class="otp" maxlength="1" inputmode="numeric">
+            </div>
+            <p class="otp-demo">演示模式:任意 4 位数字均可</p>
+            <button class="auth-btn primary" id="verifyCode">验证并进入</button>
+            <button class="link-back" data-back="email">← 修改邮箱</button>
+          </div>
+        </div>
+
+        <p class="login-legal">继续即表示同意《用户协议》与《隐私政策》。Guardian 提供健康提醒,不构成医疗诊断。</p>
+      </div>
+    </section>
 
     <!-- ============ Tab 1:今日 ============ -->
     <main class="screen active" id="screen-home">
@@ -37,6 +87,7 @@
       </div>
 
       <section class="guard-card">
+        <div class="guard-glow"></div>
         <div class="guard-ring">
           <svg viewBox="0 0 120 120">
             <circle cx="60" cy="60" r="52" class="ring-bg"/>
@@ -178,14 +229,28 @@
 
     <!-- ============ Tab 3:位置 ============ -->
     <main class="screen" id="screen-map">
-      <header class="app-header"><h2>位置与围栏</h2></header>
+      <header class="app-header">
+        <h2>位置与围栏</h2>
+        <div class="header-actions">
+          <div class="map-provider" id="mapProvider">
+            <button class="prov active" data-prov="amap">高德</button>
+            <button class="prov" data-prov="google">Google</button>
+          </div>
+        </div>
+      </header>
       <section class="map-card">
-        <div class="map-canvas">
-          <div class="map-grid"></div>
-          <div class="geofence"></div>
-          <div class="map-pin"><span class="pin-pulse"></span>🐕</div>
-          <div class="map-label home">🏠 家</div>
-          <div class="map-label park">🌳 中央公园</div>
+        <div class="map-shell">
+          <div id="map-canvas"></div>
+          <div class="map-demo" id="mapDemo">
+            <div class="map-grid"></div>
+            <div class="map-street s1"></div><div class="map-street s2"></div>
+            <div class="map-street v1"></div><div class="map-street v2"></div>
+            <div class="geofence"></div>
+            <div class="map-pin"><span class="pin-pulse"></span>🐕</div>
+            <div class="map-label home">🏠 家</div>
+            <div class="map-label park">🌳 中央公园</div>
+            <div class="map-badge" id="mapBadge">演示地图 · 在 <code>app.js</code> 填入 API key 即启用高德 / Google 实景地图</div>
+          </div>
         </div>
         <div class="map-info">
           <div><span class="meta-label">当前位置</span><span class="meta-val ok">家中 · 围栏内</span></div>
@@ -195,6 +260,8 @@
       </section>
 
       <section class="fence-list">
+        <div class="fence-head"><h3>围栏半径</h3><span id="radiusVal">200 m</span></div>
+        <input type="range" id="fenceRadius" min="50" max="500" step="10" value="200" class="range">
         <h3>电子围栏</h3>
         <div class="fence-item"><span class="fence-icon">🏠</span><div><strong>家</strong><p>半径 80 m · 始终开启</p></div><span class="switch on"></span></div>
         <div class="fence-item"><span class="fence-icon">🌳</span><div><strong>中央公园</strong><p>半径 200 m · 遛狗时段</p></div><span class="switch on"></span></div>
@@ -306,6 +373,7 @@
         <div class="menu-item"><span>🔒</span><div><strong>数据与隐私</strong><p>三级分类管理 · 随时导出或撤回授权</p></div><span class="chevron">›</span></div>
         <div class="menu-item"><span>⌚</span><div><strong>设备管理</strong><p>GUARDIAN ONE · 固件 v2.4.1 · 电量 76%</p></div><span class="chevron">›</span></div>
         <div class="menu-item"><span>💛</span><div><strong>守护者关怀计划</strong><p>失去毛孩子的家庭,我们想陪你走一段</p></div><span class="chevron">›</span></div>
+        <div class="menu-item" id="logoutBtn"><span>👋</span><div><strong>退出登录</strong><p>返回登录页</p></div><span class="chevron">›</span></div>
       </section>
 
       <p class="app-disclaimer">Guardian 提供数据记录与健康提醒,不构成医疗诊断。<br>诊断与治疗请咨询持牌兽医。保险服务由合作持牌保险主体承保与理赔。</p>
@@ -514,7 +582,7 @@
     </section>
 
     <!-- ============ 底部 Tab ============ -->
-    <nav class="tabbar">
+    <nav class="tabbar" id="tabbar">
       <button class="tab active" data-screen="screen-home"><span class="tab-icon">🏠</span>今日</button>
       <button class="tab" data-screen="screen-health"><span class="tab-icon">📈</span>健康</button>
       <button class="tab" data-screen="screen-map"><span class="tab-icon">📍</span>位置</button>
