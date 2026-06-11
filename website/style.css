@@ -403,3 +403,162 @@ html, body { overflow-x: hidden; }
   .logo { font-size: 15.5px; letter-spacing: .08em; }
   .btn-small { padding: 7px 11px; font-size: 12px; }
 }
+
+/* ════════════════════════════════════════════════════════════════
+   LIQUID GLASS 设计层 · Apple 液态玻璃质感 + Space Grotesk 字体
+   (覆盖层:置于文件末尾,统一接管 8 个页面的材质与字体)
+   ════════════════════════════════════════════════════════════════ */
+
+/* ---- 字体:Space Grotesk(可变字重,自托管)---- */
+@font-face {
+  font-family: "Space Grotesk";
+  src: url("fonts/SpaceGrotesk-var.woff2") format("woff2");
+  font-weight: 300 700;
+  font-display: swap;
+}
+:root {
+  --font-display: "Space Grotesk", "PingFang SC", "Hiragino Sans GB", "Noto Sans SC", "Microsoft YaHei", sans-serif;
+  --glass-bg: rgba(255, 255, 255, .52);
+  --glass-border: rgba(255, 255, 255, .68);
+  --glass-hilite: inset 0 1px 0 rgba(255, 255, 255, .78);
+  --glass-shadow: 0 16px 44px rgba(22, 32, 27, .10);
+  --glassd-bg: rgba(255, 255, 255, .07);
+  --glassd-border: rgba(255, 255, 255, .18);
+  --glassd-hilite: inset 0 1px 0 rgba(255, 255, 255, .16);
+}
+h1, h2, h3, .logo, .stat-num, .price-num, .hero-stats strong, .biz-metric strong,
+.eyebrow, .hero-eyebrow, .footprint-grid strong, .drop-timer {
+  font-family: var(--font-display);
+}
+.logo { font-weight: 700; letter-spacing: .14em; }
+h1, h2 { letter-spacing: 0; }
+
+/* ---- 背景氛围色斑:玻璃折射的光源 ---- */
+body { background: #f5efe4; }
+body::before {
+  content: ""; position: fixed; inset: -22%; z-index: -1; pointer-events: none;
+  background:
+    radial-gradient(38% 30% at 14% 10%, rgba(232,115,74,.20), transparent 70%),
+    radial-gradient(34% 28% at 86% 14%, rgba(216,181,108,.24), transparent 70%),
+    radial-gradient(40% 34% at 80% 88%, rgba(62,142,99,.16), transparent 70%),
+    radial-gradient(34% 28% at 6% 80%, rgba(243,165,131,.18), transparent 70%),
+    radial-gradient(26% 22% at 50% 50%, rgba(155,140,255,.08), transparent 70%);
+  filter: blur(46px);
+}
+
+/* ---- 悬浮玻璃胶囊导航 ---- */
+.nav { top: 12px; padding: 0 14px; }
+.nav-inner {
+  background: rgba(250, 246, 239, .55);
+  -webkit-backdrop-filter: blur(22px) saturate(1.8);
+  backdrop-filter: blur(22px) saturate(1.8);
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, .62);
+  box-shadow: 0 10px 36px rgba(22, 32, 27, .14), inset 0 1px 0 rgba(255, 255, 255, .85), inset 0 -1px 0 rgba(255, 255, 255, .25);
+  padding: 10px 24px;
+}
+.nav.scrolled { background: transparent; box-shadow: none; backdrop-filter: none; }
+.nav-links a.active::after { bottom: -6px; }
+.btn-small {
+  background: rgba(22, 32, 27, .82);
+  -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .22);
+}
+.lang-switch {
+  background: rgba(255, 255, 255, .45);
+  -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px);
+  border-color: rgba(255, 255, 255, .7);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .8);
+}
+
+/* ---- 亮区玻璃卡片族 ---- */
+.shell-card, .plus-card, .persona-card, .stat-card, .need-card, .biz-card,
+.track-channel, .faq-list details, .lead-form, .price-featured, .phone-mock, .fly-node {
+  background: var(--glass-bg);
+  -webkit-backdrop-filter: blur(20px) saturate(1.7);
+  backdrop-filter: blur(20px) saturate(1.7);
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--glass-shadow), var(--glass-hilite);
+}
+.plus-card { border-top: 3px solid rgba(232, 115, 74, .75); }
+.mock-notif {
+  background: rgba(255, 255, 255, .66);
+  -webkit-backdrop-filter: blur(14px); backdrop-filter: blur(14px);
+  border: 1px solid rgba(255, 255, 255, .7);
+}
+.img-card .img-cap { backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); }
+
+/* ---- 暗区玻璃卡片族 ---- */
+.feature-card, .pillar, .step, .price-card {
+  background: var(--glassd-bg);
+  -webkit-backdrop-filter: blur(14px) saturate(1.4);
+  backdrop-filter: blur(14px) saturate(1.4);
+  border: 1px solid var(--glassd-border);
+  box-shadow: var(--glassd-hilite);
+}
+.price-featured { box-shadow: 0 28px 70px rgba(0, 0, 0, .35), var(--glass-hilite); color: var(--ink); }
+.section-dark .stat-card {
+  background: var(--glassd-bg);
+  -webkit-backdrop-filter: blur(14px) saturate(1.4);
+  backdrop-filter: blur(14px) saturate(1.4);
+  border: 1px solid var(--glassd-border);
+  box-shadow: var(--glassd-hilite);
+}
+
+/* ---- 按钮玻璃光感 ---- */
+.btn-primary {
+  background: linear-gradient(180deg, #f08a5e, #e8734a);
+  box-shadow: 0 10px 26px rgba(232, 115, 74, .38), inset 0 1px 0 rgba(255, 255, 255, .5);
+}
+.btn-ghost {
+  background: rgba(255, 255, 255, .35);
+  -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, .65);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .7);
+}
+.section-dark .btn-ghost, .cta-final .btn-ghost {
+  background: rgba(255, 255, 255, .08);
+  border-color: rgba(255, 255, 255, .35);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .2);
+}
+
+/* ---- 对比表 / 表单 / 影片框 ---- */
+.compare-wrap {
+  border-radius: 24px;
+  border: 1px solid rgba(255, 255, 255, .45);
+  -webkit-backdrop-filter: blur(16px) saturate(1.5);
+  backdrop-filter: blur(16px) saturate(1.5);
+}
+.compare { background: rgba(255, 255, 255, .76); }
+.compare thead th { background: rgba(29, 43, 37, .88); }
+.compare thead th.hl { background: rgba(232, 115, 74, .92); }
+.compare td.hl { background: rgba(232, 115, 74, .10); }
+.lead-form input, .lead-form select, .lead-form textarea {
+  background: rgba(255, 255, 255, .55);
+  border-color: rgba(255, 255, 255, .8);
+}
+.film-frame { border: 1px solid rgba(255, 255, 255, .28); box-shadow: 0 40px 110px rgba(0, 0, 0, .5), inset 0 1px 0 rgba(255, 255, 255, .2); }
+.ticker { background: rgba(29, 43, 37, .9); -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px); }
+
+/* ---- 移动端:玻璃下拉菜单 + 胶囊导航适配 ---- */
+@media (max-width: 900px) {
+  .nav { top: 8px; padding: 0 10px; }
+  .nav-inner { padding: 9px 16px; }
+  .nav.open .nav-links {
+    background: rgba(250, 246, 239, .72);
+    -webkit-backdrop-filter: blur(24px) saturate(1.8);
+    backdrop-filter: blur(24px) saturate(1.8);
+    border-radius: 24px;
+    border: 1px solid rgba(255, 255, 255, .65);
+    box-shadow: 0 24px 60px rgba(22, 32, 27, .2), inset 0 1px 0 rgba(255, 255, 255, .8);
+    margin-top: 10px;
+  }
+}
+
+/* ---- 不支持 backdrop-filter 的降级 ---- */
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .nav-inner { background: rgba(250, 246, 239, .92); }
+  .shell-card, .plus-card, .persona-card, .stat-card, .need-card, .biz-card,
+  .track-channel, .faq-list details, .lead-form, .price-featured, .phone-mock, .fly-node { background: rgba(255, 255, 255, .9); }
+  .compare { background: rgba(255, 255, 255, .95); }
+}
