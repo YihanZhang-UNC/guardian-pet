@@ -18,6 +18,15 @@
   .headline .hl { color: #e8734a; }
   .subline { font-size: 40px; font-weight: 400; letter-spacing: .1em; color: rgba(250,246,239,.78); }
   .quietline { font-size: 33px; font-weight: 300; letter-spacing: .12em; color: rgba(250,246,239,.6); }
+  .dark-stage { background: radial-gradient(ellipse 66% 58% at 50% 34%, #16241d 0%, #0c120f 78%); }
+
+  /* 通用左对齐技术行(硬件/AI/路线图共用) */
+  .rows { display: flex; flex-direction: column; gap: 24px; text-align: left; }
+  .row { display: flex; align-items: center; gap: 26px; }
+  .row-key { width: 250px; font-size: 27px; font-weight: 800; letter-spacing: .1em; color: #d8b56c; text-align: right; flex-shrink: 0; }
+  .row-dot { width: 16px; height: 16px; border-radius: 50%; background: #e8734a; flex-shrink: 0; box-shadow: 0 0 16px rgba(232,115,74,.7); }
+  .row-text { font-size: 34px; font-weight: 600; }
+  .row-text small { display: block; font-size: 22px; font-weight: 300; color: rgba(250,246,239,.6); margin-top: 3px; }
 
   /* S1 logo */
   #s1 { background: radial-gradient(ellipse 62% 50% at 50% 42%, #1d2b25 0%, #0c120f 72%); }
@@ -27,8 +36,6 @@
   #logo-sub { font-size: 34px; letter-spacing: .42em; text-indent: .42em; color: rgba(250,246,239,.66); font-weight: 300; }
 
   /* S2 功能亮相 */
-  #s2 { background: radial-gradient(ellipse 60% 60% at 50% 40%, #15231c 0%, #0c120f 76%); }
-  #s2 .center-stack { gap: 30px; }
   #s2-l1, #s2-l2 { position: absolute; width: 100%; text-align: center; }
   #feature-reveal { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 26px; }
   #feature-halo { position: absolute; width: 760px; height: 760px; border-radius: 50%;
@@ -37,78 +44,91 @@
   #feature-en { font-size: 34px; letter-spacing: .35em; text-indent: .35em; color: rgba(250,246,239,.55); font-weight: 300; position: relative; }
 
   /* S3 功能介绍 */
-  #s3 { background: radial-gradient(ellipse 70% 56% at 50% 30%, #15231c 0%, #0c120f 78%); }
-  #s3 .center-stack { gap: 26px; }
-  #chart-reveal { width: 0; overflow: hidden; margin: 30px 0 6px; }
-  #chart-svg { width: 1100px; height: 230px; display: block; }
+  #s3 .center-stack { gap: 24px; }
+  #chart-reveal { width: 0; overflow: hidden; margin: 26px 0 4px; }
+  #chart-svg { width: 1100px; height: 220px; display: block; }
   #chart-svg .band { fill: rgba(250,246,239,.09); }
   #chart-svg .line { fill: none; stroke: #e8734a; stroke-width: 6; stroke-linecap: round; }
   .chart-tag { font-size: 26px; letter-spacing: .25em; color: #d8b56c; font-weight: 600; }
-  #notif { width: 860px; background: rgba(250,246,239,.97); color: #16201b; border-radius: 26px; padding: 30px 38px; text-align: left; box-shadow: 0 40px 100px rgba(0,0,0,.5); }
-  #notif .n-head { display: flex; align-items: center; gap: 13px; font-size: 22px; color: #6b7670; margin-bottom: 12px; }
+  #notif { width: 860px; background: rgba(250,246,239,.97); color: #16201b; border-radius: 26px; padding: 28px 36px; text-align: left; box-shadow: 0 40px 100px rgba(0,0,0,.5); }
+  #notif .n-head { display: flex; align-items: center; gap: 13px; font-size: 22px; color: #6b7670; margin-bottom: 10px; }
   #notif .n-icon { width: 28px; height: 28px; border-radius: 8px; background: linear-gradient(135deg, #e8734a, #d8b56c); }
   #notif .n-title { font-size: 30px; font-weight: 700; margin-bottom: 6px; }
   #notif .n-body { font-size: 24px; color: #45524b; line-height: 1.6; }
-  #restraint { display: flex; gap: 90px; margin-top: 10px; }
-  #restraint .r { display: flex; flex-direction: column; align-items: center; gap: 8px; }
-  #restraint strong { font-size: 84px; font-weight: 800; }
+  #restraint { display: flex; gap: 90px; margin-top: 8px; }
+  #restraint .r { display: flex; flex-direction: column; align-items: center; gap: 6px; }
+  #restraint strong { font-size: 78px; font-weight: 800; }
   #restraint .accent strong { color: #e8734a; }
-  #restraint span { font-size: 24px; letter-spacing: .18em; color: rgba(250,246,239,.62); }
+  #restraint span { font-size: 23px; letter-spacing: .18em; color: rgba(250,246,239,.62); }
 
-  /* S4 persona */
-  #s4 .center-stack { justify-content: flex-end; padding-bottom: 120px; gap: 34px; }
+  /* S4 硬件×软件 */
+  #s4 .center-stack { gap: 34px; }
+  #pipe { display: flex; align-items: center; gap: 22px; margin-top: 8px; }
+  .pipe-step { background: rgba(250,246,239,.07); border: 1px solid rgba(250,246,239,.18); border-radius: 20px; padding: 24px 34px; font-size: 28px; font-weight: 600; }
+  .pipe-step small { display: block; font-size: 20px; font-weight: 300; color: rgba(250,246,239,.6); margin-top: 4px; }
+  .pipe-arrow { font-size: 34px; color: #e8734a; font-weight: 800; }
+
+  /* S5 AI */
+  #s5x .center-stack { gap: 36px; }
+  #ai-close { font-size: 76px; font-weight: 700; }
+  #ai-close .hl { color: #e8734a; }
+  .row.red .row-dot { background: #d9952e; box-shadow: 0 0 16px rgba(217,149,46,.7); }
+  .row.red .row-key { color: #d9952e; }
+
+  /* S6 persona */
+  #s6p .center-stack { justify-content: flex-end; padding-bottom: 120px; gap: 34px; }
   #persona-title { font-size: 40px; letter-spacing: .2em; color: #f3d1a0; font-weight: 600; }
-  #s4 .headline { font-size: 66px; line-height: 1.55; }
-  #s4-cap1, #s4-cap2, #s4-cap3 { position: absolute; width: 100%; left: 0; text-align: center; }
+  #s6p .headline { font-size: 66px; line-height: 1.55; }
+  #s6-cap1, #s6-cap2, #s6-cap3 { position: absolute; width: 100%; left: 0; text-align: center; }
 
-  /* S5 自由 */
-  #s5 .center-stack { justify-content: flex-end; padding-bottom: 130px; gap: 34px; }
-  #s5 .headline { font-size: 96px; }
+  /* S7 自由 */
+  #s7f .center-stack { justify-content: flex-end; padding-bottom: 130px; gap: 32px; }
+  #s7f .headline { font-size: 96px; }
   #free-chips { display: flex; gap: 26px; }
-  .chip { font-size: 28px; font-weight: 600; padding: 16px 36px; border-radius: 999px; border: 2px solid rgba(250,246,239,.65); background: rgba(12,18,15,.35); backdrop-filter: blur(4px); }
+  .chip { font-size: 28px; font-weight: 600; padding: 15px 34px; border-radius: 999px; border: 2px solid rgba(250,246,239,.65); background: rgba(12,18,15,.35); }
 
-  /* S6 roadmap */
-  #s6 { background: radial-gradient(ellipse 64% 58% at 50% 34%, #16241d 0%, #0c120f 78%); }
-  #s6 .center-stack { gap: 34px; }
-  #roadmap { display: flex; flex-direction: column; gap: 26px; text-align: left; }
-  .rm { display: flex; align-items: center; gap: 28px; }
-  .rm-time { width: 190px; font-size: 26px; font-weight: 800; letter-spacing: .12em; color: #d8b56c; text-align: right; flex-shrink: 0; }
-  .rm-dot { width: 18px; height: 18px; border-radius: 50%; background: #e8734a; flex-shrink: 0; box-shadow: 0 0 18px rgba(232,115,74,.7); }
-  .rm-text { font-size: 36px; font-weight: 600; }
-  .rm-text small { display: block; font-size: 23px; font-weight: 300; color: rgba(250,246,239,.6); margin-top: 4px; }
-
-  /* S7 定位与人群 */
-  #s7 { background: radial-gradient(ellipse 70% 56% at 50% 30%, #15231c 0%, #0c120f 78%); }
-  #s7 .center-stack { gap: 34px; }
-  #s7-l1, #s7-l2 { position: absolute; width: 100%; text-align: center; }
-  #persona-cards { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; gap: 40px; }
-  .pcard { width: 420px; background: rgba(250,246,239,.06); border: 1px solid rgba(250,246,239,.16); border-radius: 28px; padding: 46px 38px; text-align: center; }
-  .pcard .pc-icon { font-size: 64px; margin-bottom: 20px; }
-  .pcard h3 { font-size: 36px; margin-bottom: 14px; }
-  .pcard p { font-size: 24px; color: rgba(250,246,239,.65); line-height: 1.7; }
-
-  /* S8 愿景 */
-  #s8 { background: #0c120f; }
-  #net-dots { position: absolute; inset: 0; opacity: .5;
+  /* S8 网络节点 */
+  #net-dots { position: absolute; inset: 0; opacity: .45;
     background-image: radial-gradient(rgba(232,115,74,.55) 2.5px, transparent 2.5px), radial-gradient(rgba(216,181,108,.4) 2px, transparent 2px);
     background-size: 170px 170px, 230px 230px; background-position: 0 0, 80px 110px; }
-  #s8 .center-stack { gap: 42px; }
-  #s8 .headline { font-size: 76px; }
+  #s8n .center-stack { gap: 30px; }
+  #s8n .headline { font-size: 74px; }
+  #value-chips { display: flex; gap: 22px; flex-wrap: wrap; justify-content: center; max-width: 1500px; }
+  #value-chips .chip { border-color: rgba(216,181,108,.7); color: #f5e6c8; }
 
-  /* S9 结尾 */
-  #s9 { background: #0c120f; }
-  #s9 .center-stack > * { position: absolute; }
-  #s9 .headline { font-size: 100px; line-height: 1.6; }
+  /* S9 对比 */
+  #s9v .center-stack { gap: 30px; }
+  #s9v-l1 { font-size: 84px; font-weight: 700; }
+  #vs-card { display: flex; gap: 0; border-radius: 28px; overflow: hidden; box-shadow: 0 40px 100px rgba(0,0,0,.5); }
+  .vs-col { width: 560px; padding: 40px 50px; }
+  .vs-col.dim { background: rgba(250,246,239,.06); border: 1px solid rgba(250,246,239,.12); border-right: none; border-radius: 28px 0 0 28px; }
+  .vs-col.win { background: rgba(232,115,74,.12); border: 1px solid rgba(232,115,74,.45); border-radius: 0 28px 28px 0; }
+  .vs-head { font-size: 32px; font-weight: 800; margin-bottom: 6px; }
+  .vs-sub { font-size: 20px; color: rgba(250,246,239,.55); margin-bottom: 22px; }
+  .vs-row { display: flex; justify-content: space-between; align-items: center; padding: 13px 0; border-bottom: 1px dashed rgba(250,246,239,.14); font-size: 25px; }
+  .vs-row:last-child { border: none; }
+  .vs-row .no { color: rgba(250,246,239,.35); }
+  .vs-row .yes { color: #7fd4a5; font-weight: 800; }
+  #s9v-close { font-size: 56px; font-weight: 700; line-height: 1.5; }
+  #s9v-close .hl { color: #e8734a; }
+
+  /* S10 roadmap */
+  #s10r .center-stack { gap: 34px; }
+
+  /* S11 结尾 */
+  #s11 { background: #0c120f; }
+  #s11 .center-stack > * { position: absolute; }
+  #s11 .headline { font-size: 100px; line-height: 1.6; }
   #end-logo { font-size: 130px; font-weight: 800; letter-spacing: .22em; text-indent: .22em; }
   #end-logo .dot { color: #e8734a; }
-  #end-slogan { font-size: 46px; letter-spacing: .24em; color: rgba(250,246,239,.85); font-weight: 300; margin-top: 46px; }
-  #s9-final { display: flex; flex-direction: column; align-items: center; }
+  #end-slogan { font-size: 46px; letter-spacing: .2em; color: rgba(250,246,239,.85); font-weight: 300; margin-top: 46px; }
+  #s11-final { display: flex; flex-direction: column; align-items: center; }
 </style>
 </head>
 <body>
-<div id="root" data-composition-id="main" data-start="0" data-duration="150" data-width="1920" data-height="1080">
+<div id="root" data-composition-id="main" data-start="0" data-duration="195" data-width="1920" data-height="1080">
 
-  <audio id="score" class="clip" data-start="0" data-duration="150" data-track-index="0" data-volume="0.9" src="assets/score2.wav"></audio>
+  <audio id="score" class="clip" data-start="0" data-duration="195" data-track-index="0" data-volume="0.9" src="assets/score2.wav"></audio>
 
   <!-- S1 · Logo 0-8 -->
   <div id="s1" class="scene clip" data-start="0" data-duration="8" data-track-index="1">
@@ -119,8 +139,8 @@
     </div>
   </div>
 
-  <!-- S2 · 引入与功能亮相 7.6-25 -->
-  <div id="s2" class="scene clip" data-start="7.6" data-duration="17.4" data-track-index="2">
+  <!-- S2 · 引入与功能亮相 7.6-23 -->
+  <div id="s2" class="scene clip dark-stage" data-start="7.6" data-duration="15.4" data-track-index="2">
     <div class="headline" id="s2-l1" style="top:42%">每一只狗的「正常」,<br>都不一样。</div>
     <div class="subline" id="s2-l2" style="top:64%">可长久以来,我们都在用同一把尺子衡量它们。</div>
     <div id="feature-reveal">
@@ -131,20 +151,20 @@
     </div>
   </div>
 
-  <!-- S3 · 功能介绍 24.6-48 -->
-  <div id="s3" class="scene clip" data-start="24.6" data-duration="23.4" data-track-index="1">
+  <!-- S3 · 功能介绍 22.6-42 -->
+  <div id="s3" class="scene clip dark-stage" data-start="22.6" data-duration="19.4" data-track-index="1">
     <div class="center-stack">
-      <div class="headline" id="s3-head" style="font-size:72px">认识它自己的「正常」。</div>
+      <div class="headline" id="s3-head" style="font-size:70px">认识它自己的「正常」。</div>
       <div class="chart-tag" id="s3-tag">365 天 · 连续建模 · 只和它自己比</div>
       <div id="chart-reveal">
-        <svg id="chart-svg" viewBox="0 0 1100 230" preserveAspectRatio="none">
-          <path class="band" d="M0,72 C180,62 360,86 550,74 C740,62 920,80 1100,68 L1100,156 C920,168 740,150 550,162 C360,174 180,148 0,160 Z"/>
-          <polyline class="line" points="0,126 110,112 220,122 330,102 440,116 550,94 660,110 770,90 880,106 990,96 1100,102"/>
+        <svg id="chart-svg" viewBox="0 0 1100 220" preserveAspectRatio="none">
+          <path class="band" d="M0,68 C180,58 360,82 550,70 C740,58 920,76 1100,64 L1100,150 C920,162 740,144 550,156 C360,168 180,142 0,154 Z"/>
+          <polyline class="line" points="0,120 110,106 220,116 330,96 440,110 550,88 660,104 770,84 880,100 990,90 1100,96"/>
         </svg>
       </div>
       <div id="notif">
         <div class="n-head"><div class="n-icon"></div>Guardian · 现在</div>
-        <div class="n-title">墩墩的活动量有些变化</div>
+        <div class="n-title">七七的活动量有些变化</div>
         <div class="n-body">过去 48 小时活动量比近 30 天平均下降 31%,为 90 天内首次。建议今天多留意,如持续可咨询兽医。</div>
       </div>
       <div id="restraint">
@@ -156,26 +176,61 @@
     </div>
   </div>
 
-  <!-- S4 · 杭州小朱 47.6-70 -->
-  <div id="s4" class="scene clip" data-start="47.6" data-duration="22.4" data-track-index="2">
-    <img class="full-img" id="s4-img" src="assets/corgi-walk.jpg" alt="">
-    <div class="shade"></div>
+  <!-- S4 · 硬件×软件 41.6-66 -->
+  <div id="s4" class="scene clip dark-stage" data-start="41.6" data-duration="24.4" data-track-index="2">
     <div class="center-stack">
-      <div id="persona-title">杭州 · 小朱 × 柯基「墩墩」</div>
-      <div class="headline" id="s4-cap1" style="bottom:240px">28 岁,产品经理。<br>工作日的白天,家里只有墩墩自己。</div>
-      <div class="headline" id="s4-cap2" style="bottom:240px">守护第 143 天,Guardian 第一次开口:<br>「48 小时活动量,下降了 <span class="hl">31%</span>。」</div>
-      <div class="headline" id="s4-cap3" style="bottom:240px">兽医检查后,只说了四个字:<br>「<span class="hl">来得挺及时</span>。」</div>
+      <div class="headline" id="s4-head" style="font-size:74px">它是怎么做到的?</div>
+      <div class="chart-tag" id="s4-sub">硬件负责感知 · 软件负责理解</div>
+      <div class="rows" id="hw-rows">
+        <div class="row" id="hw1"><div class="row-key">6 轴 IMU</div><div class="row-dot"></div><div class="row-text">行为与姿态<small>行走、奔跑、异常静止、异常步态</small></div></div>
+        <div class="row" id="hw2"><div class="row-key">高效能 PPG</div><div class="row-dot"></div><div class="row-text">心率与 HRV 趋势<small>不追求单点临床精度,追求相对趋势的稳定</small></div></div>
+        <div class="row" id="hw3"><div class="row-key">辅助温感</div><div class="row-dot"></div><div class="row-text">体表温度趋势<small>静止休眠 · 异动唤醒,功耗与守护两全</small></div></div>
+        <div class="row" id="hw4"><div class="row-key">GNSS 多星</div><div class="row-dot"></div><div class="row-text">实时定位与围栏<small>断网本地存 7 天 · 心跳上报 · OTA 常新</small></div></div>
+      </div>
+      <div id="pipe">
+        <div class="pipe-step" id="pp1">端侧过滤<small>甩动、洗澡、非佩戴,先滤掉</small></div>
+        <div class="pipe-arrow" id="pa1">→</div>
+        <div class="pipe-step" id="pp2">云端建模<small>为它单独建立基准线</small></div>
+        <div class="pipe-arrow" id="pa2">→</div>
+        <div class="pipe-step" id="pp3">3σ 触发<small>连续偏离统计阈值,才开口</small></div>
+      </div>
     </div>
   </div>
 
-  <!-- S5 · 更好与自由 69.6-88 -->
-  <div id="s5" class="scene clip" data-start="69.6" data-duration="18.4" data-track-index="1">
-    <img class="full-img" id="s5-img" src="assets/corgi-beach.jpg" alt="">
+  <!-- S5 · AI 的角色 65.6-86 -->
+  <div id="s5x" class="scene clip dark-stage" data-start="65.6" data-duration="20.4" data-track-index="1">
+    <div class="center-stack">
+      <div class="headline" id="s5-head" style="font-size:74px">在这套系统里,AI 是什么?</div>
+      <div class="rows" id="ai-rows">
+        <div class="row" id="ai1"><div class="row-key">感知层</div><div class="row-dot"></div><div class="row-text">把嘈杂信号,翻译成生活事件<small>一段震动,是撒欢,还是异常?</small></div></div>
+        <div class="row" id="ai2"><div class="row-key">解释层</div><div class="row-dot"></div><div class="row-text">说清「发生了什么变化」<small>幅度多大、持续多久、历史上是否出现过</small></div></div>
+        <div class="row" id="ai3"><div class="row-key">决策缓冲层</div><div class="row-dot"></div><div class="row-text">判断「值不值得现在打扰你」<small>立即推送 / 合并 / 静默记录</small></div></div>
+        <div class="row red" id="ai4"><div class="row-key">红线</div><div class="row-dot"></div><div class="row-text">诊断与理赔,永远由人类裁决<small>AI 不拥有最终判断权,全程可解释、可审计</small></div></div>
+      </div>
+      <div id="ai-close">AI 是<span class="hl">神经系统</span>,不是大脑。</div>
+    </div>
+  </div>
+
+  <!-- S6 · 杭州小朱×七七 85.6-106 -->
+  <div id="s6p" class="scene clip" data-start="85.6" data-duration="20.4" data-track-index="2">
+    <img class="full-img" id="s6-img" src="assets/corgi-walk.jpg" alt="">
     <div class="shade"></div>
     <div class="center-stack">
-      <div class="subline" id="s5-l1">现在的小朱,依然加班、依然出差。</div>
-      <div class="subline" id="s5-l2">只是不再整夜地猜,它好不好。</div>
-      <div class="headline" id="s5-l3">它<span class="hl">自由</span>,你也<span class="hl">自由</span>。</div>
+      <div id="persona-title">杭州 · 小朱 × 柯基「七七」</div>
+      <div class="headline" id="s6-cap1" style="bottom:240px">25 岁,金融分析师。<br>看盘的白天,家里只有七七自己。</div>
+      <div class="headline" id="s6-cap2" style="bottom:240px">守护第 143 天,Guardian 第一次开口:<br>「48 小时活动量,下降了 <span class="hl">31%</span>。」</div>
+      <div class="headline" id="s6-cap3" style="bottom:240px">兽医检查后,只说了四个字:<br>「<span class="hl">来得挺及时</span>。」</div>
+    </div>
+  </div>
+
+  <!-- S7 · 自由 105.6-121 -->
+  <div id="s7f" class="scene clip" data-start="105.6" data-duration="15.4" data-track-index="1">
+    <img class="full-img" id="s7-img" src="assets/corgi-beach.jpg" alt="">
+    <div class="shade"></div>
+    <div class="center-stack">
+      <div class="subline" id="s7-l1">现在的小朱,依然盯盘、依然出差。</div>
+      <div class="subline" id="s7-l2">只是不再整夜地猜,它好不好。</div>
+      <div class="headline" id="s7-l3">它<span class="hl">自由</span>,你也<span class="hl">自由</span>。</div>
       <div id="free-chips">
         <div class="chip" id="fc1">安心加班</div>
         <div class="chip" id="fc2">放心出差</div>
@@ -184,48 +239,77 @@
     </div>
   </div>
 
-  <!-- S6 · 实现走向 87.6-106 -->
-  <div id="s6" class="scene clip" data-start="87.6" data-duration="18.4" data-track-index="2">
-    <div class="center-stack">
-      <div class="headline" id="s6-head" style="font-size:78px">这,只是开始。</div>
-      <div id="roadmap">
-        <div class="rm" id="rm1"><div class="rm-time">现在</div><div class="rm-dot"></div><div class="rm-text">趋势提醒 · 个体基准线<small>已随 GUARDIAN+ 上线</small></div></div>
-        <div class="rm" id="rm2"><div class="rm-time">接下来</div><div class="rm-dot"></div><div class="rm-text">云端兽医 · 数据随诊<small>提醒之后,有人接住</small></div></div>
-        <div class="rm" id="rm3"><div class="rm-time">然后</div><div class="rm-dot"></div><div class="rm-text">健康月报 · 静息呼吸趋势<small>复诊时,带上它的 365 天</small></div></div>
-        <div class="rm" id="rm4"><div class="rm-time">未来</div><div class="rm-dot"></div><div class="rm-text">守护保障 · 慢病管理<small>规律生活,保费打折</small></div></div>
-      </div>
-      <div class="quietline" id="s6-foot">每一步,都守住同一条边界:提醒 ≠ 诊断。</div>
-    </div>
-  </div>
-
-  <!-- S7 · 市场定位与人群 105.6-122 -->
-  <div id="s7" class="scene clip" data-start="105.6" data-duration="16.4" data-track-index="1">
-    <div class="headline" id="s7-l1" style="top:40%">它不是定位器,<br>也不是医疗器械。</div>
-    <div class="headline" id="s7-l2" style="top:38%;font-size:76px">它是中间那个一直缺席的角色:<br><span class="hl">风险管理的闭环</span>。</div>
-    <div id="persona-cards">
-      <div class="pcard" id="pc1"><div class="pc-icon">🛹</div><h3>潮流玩家</h3><p>先被颜值种草,<br>后被守护留下</p></div>
-      <div class="pcard" id="pc2"><div class="pc-icon">💼</div><h3>牵挂的上班族</h3><p>上班 8 小时,<br>不再靠猜</p></div>
-      <div class="pcard" id="pc3"><div class="pc-icon">🐾</div><h3>老龄犬家庭</h3><p>慢性变化,<br>最怕发现太晚</p></div>
-    </div>
-  </div>
-
-  <!-- S8 · 未来愿景 121.6-135 -->
-  <div id="s8" class="scene clip" data-start="121.6" data-duration="13.4" data-track-index="2">
+  <!-- S8 · 网络节点 120.6-143 -->
+  <div id="s8n" class="scene clip" data-start="120.6" data-duration="22.4" data-track-index="2" style="background:#0c120f">
     <div id="net-dots"></div>
     <div class="center-stack">
-      <div class="headline" id="s8-l1">每一只佩戴 Guardian 的狗,<br>都是网络的一个节点。</div>
-      <div class="subline" id="s8-l2">数据越多,提醒越准,守护越安静。</div>
-      <div class="quietline" id="s8-l3">而 AI,永远不做诊断。</div>
+      <div class="headline" id="s8-head">每一只狗,都是网络的一个节点。</div>
+      <div class="rows" id="net-rows">
+        <div class="row" id="nr1"><div class="row-key">贡献</div><div class="row-dot"></div><div class="row-text">每个节点贡献匿名化的行为模式<small>只有模式,没有身份;隐私轨迹永不离开你的授权</small></div></div>
+        <div class="row" id="nr2"><div class="row-key">反哺</div><div class="row-dot"></div><div class="row-text">群体模式库,反哺每一条个体基准线<small>新来的狗,更快被「读懂」</small></div></div>
+        <div class="row" id="nr3"><div class="row-key">飞轮</div><div class="row-dot"></div><div class="row-text">装机越多 → 噪音识别越准 → 误报越少<small>守护,随网络一起变安静</small></div></div>
+      </div>
+      <div class="chart-tag" id="value-title">对你来说,这意味着</div>
+      <div id="value-chips">
+        <div class="chip" id="vc1">基准线建立更快</div>
+        <div class="chip" id="vc2">误报更少</div>
+        <div class="chip" id="vc3">异常更早被识别</div>
+        <div class="chip" id="vc4">理赔证据更可信</div>
+      </div>
     </div>
   </div>
 
-  <!-- S9 · 结尾 134.6-150 -->
-  <div id="s9" class="scene clip" data-start="134.6" data-duration="15.4" data-track-index="1">
+  <!-- S9 · 致敬与对比 142.6-161 -->
+  <div id="s9v" class="scene clip dark-stage" data-start="142.6" data-duration="18.4" data-track-index="1">
     <div class="center-stack">
-      <div class="headline" id="s9-l1">不是和别的狗比,<br>是和昨天的<span class="hl">它自己</span>比。</div>
-      <div id="s9-final">
+      <div id="s9v-l1">向先行者致敬。</div>
+      <div class="subline" id="s9v-sub">定位与活动追踪,Tractive 们已经做得很好。</div>
+      <div id="vs-card">
+        <div class="vs-col dim">
+          <div class="vs-head">优秀的追踪器</div>
+          <div class="vs-sub">Tractive 等 GPS 追踪品类</div>
+          <div class="vs-row"><span>GPS 实时定位</span><span class="yes">✓</span></div>
+          <div class="vs-row"><span>活动与睡眠记录</span><span class="yes">✓</span></div>
+          <div class="vs-row"><span>多维生理趋势(PPG/HRV)</span><span class="no">—</span></div>
+          <div class="vs-row"><span>个体基准线引擎</span><span class="no">—</span></div>
+          <div class="vs-row"><span>决策缓冲式提醒</span><span class="no">—</span></div>
+          <div class="vs-row"><span>兽医与保障闭环</span><span class="no">—</span></div>
+        </div>
+        <div class="vs-col win">
+          <div class="vs-head">GUARDIAN</div>
+          <div class="vs-sub">追踪之后的下一步</div>
+          <div class="vs-row"><span>GPS 实时定位</span><span class="yes">✓</span></div>
+          <div class="vs-row"><span>活动与睡眠记录</span><span class="yes">✓</span></div>
+          <div class="vs-row"><span>多维生理趋势(PPG/HRV)</span><span class="yes">✓</span></div>
+          <div class="vs-row"><span>个体基准线引擎</span><span class="yes">✓</span></div>
+          <div class="vs-row"><span>决策缓冲式提醒</span><span class="yes">✓</span></div>
+          <div class="vs-row"><span>兽医与保障闭环</span><span class="yes">✓</span></div>
+        </div>
+      </div>
+      <div id="s9v-close">我们不是更好的追踪器。<br>我们是追踪器之后的<span class="hl">下一步</span>。</div>
+    </div>
+  </div>
+
+  <!-- S10 · 路线图 160.6-172 -->
+  <div id="s10r" class="scene clip dark-stage" data-start="160.6" data-duration="11.4" data-track-index="2">
+    <div class="center-stack">
+      <div class="headline" id="s10-head" style="font-size:74px">这,只是开始。</div>
+      <div class="rows" id="rm-rows">
+        <div class="row" id="rm1"><div class="row-key">现在</div><div class="row-dot"></div><div class="row-text">趋势提醒 · 个体基准线<small>已随 GUARDIAN+ 上线</small></div></div>
+        <div class="row" id="rm2"><div class="row-key">接下来</div><div class="row-dot"></div><div class="row-text">云端兽医 · 数据随诊<small>提醒之后,有人接住</small></div></div>
+        <div class="row" id="rm3"><div class="row-key">然后</div><div class="row-dot"></div><div class="row-text">健康月报 · 静息呼吸趋势<small>复诊时,带上它的 365 天</small></div></div>
+        <div class="row" id="rm4"><div class="row-key">未来</div><div class="row-dot"></div><div class="row-text">守护保障 · 慢病管理<small>规律生活,保费打折</small></div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- S11 · 结尾 171.6-195 -->
+  <div id="s11" class="scene clip" data-start="171.6" data-duration="23.4" data-track-index="1">
+    <div class="center-stack">
+      <div class="headline" id="s11-l1">不是和别的狗比,<br>是和昨天的<span class="hl">它自己</span>比。</div>
+      <div id="s11-final">
         <div id="end-logo">GUARDIAN<span class="dot">.</span></div>
-        <div id="end-slogan">它自由,你也自由。</div>
+        <div id="end-slogan">替你守着,那个不会说话的家人。</div>
       </div>
     </div>
   </div>
@@ -243,88 +327,118 @@ tl.fromTo("#logo-rule", { width: 0, opacity: 0 }, { width: 460, opacity: 1, dura
 tl.fromTo("#logo-sub", { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 1.1, ease: EASE }, 2.5);
 tl.to("#s1 .center-stack", { opacity: 0, scale: 1.03, duration: 1.0, ease: "power2.in" }, 6.8);
 
-/* S2 引入与功能亮相 7.6-25 */
+/* S2 引入与亮相 7.6-23 */
 tl.fromTo("#s2", { opacity: 0 }, { opacity: 1, duration: 1.0 }, 7.7);
 tl.fromTo("#s2-l1", { opacity: 0, y: 34 }, { opacity: 1, y: 0, duration: 1.3, ease: EASE }, 9.0);
-tl.fromTo("#s2-l2", { opacity: 0, y: 28 }, { opacity: 1, y: 0, duration: 1.2, ease: EASE }, 12.4);
-tl.to("#s2-l1", { opacity: 0, y: -20, duration: 0.9, ease: "power2.in" }, 15.6);
-tl.to("#s2-l2", { opacity: 0, y: -20, duration: 0.9, ease: "power2.in" }, 15.7);
-tl.fromTo("#feature-halo", { opacity: 0, scale: 0.5 }, { opacity: 1, scale: 1, duration: 2.2, ease: EASE }, 16.6);
-tl.fromTo("#feature-kicker", { opacity: 0, y: 26 }, { opacity: 1, y: 0, duration: 1.0, ease: EASE }, 17.2);
-tl.fromTo("#feature-name", { opacity: 0, scale: 0.92, y: 22 }, { opacity: 1, scale: 1, y: 0, duration: 1.5, ease: "power3.out" }, 17.8);
-tl.fromTo("#feature-en", { opacity: 0, y: 18 }, { opacity: 1, y: 0, duration: 1.1, ease: EASE }, 18.9);
-tl.to("#feature-halo", { scale: 1.08, duration: 2.4, repeat: 1, yoyo: true, ease: "sine.inOut" }, 19.4);
-tl.to("#s2", { opacity: 0, duration: 1.1 }, 23.8);
+tl.fromTo("#s2-l2", { opacity: 0, y: 28 }, { opacity: 1, y: 0, duration: 1.2, ease: EASE }, 11.8);
+tl.to("#s2-l1", { opacity: 0, y: -20, duration: 0.9, ease: "power2.in" }, 14.4);
+tl.to("#s2-l2", { opacity: 0, y: -20, duration: 0.9, ease: "power2.in" }, 14.5);
+tl.fromTo("#feature-halo", { opacity: 0, scale: 0.5 }, { opacity: 1, scale: 1, duration: 2.0, ease: EASE }, 15.3);
+tl.fromTo("#feature-kicker", { opacity: 0, y: 26 }, { opacity: 1, y: 0, duration: 1.0, ease: EASE }, 15.9);
+tl.fromTo("#feature-name", { opacity: 0, scale: 0.92, y: 22 }, { opacity: 1, scale: 1, y: 0, duration: 1.5, ease: "power3.out" }, 16.5);
+tl.fromTo("#feature-en", { opacity: 0, y: 18 }, { opacity: 1, y: 0, duration: 1.1, ease: EASE }, 17.6);
+tl.to("#feature-halo", { scale: 1.08, duration: 1.8, repeat: 1, yoyo: true, ease: "sine.inOut" }, 18.2);
+tl.to("#s2", { opacity: 0, duration: 1.1 }, 21.8);
 
-/* S3 功能介绍 24.6-48 */
-tl.fromTo("#s3", { opacity: 0 }, { opacity: 1, duration: 1.0 }, 24.7);
-tl.fromTo("#s3-head", { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 1.2, ease: EASE }, 25.7);
-tl.fromTo("#s3-tag", { opacity: 0, y: 22 }, { opacity: 1, y: 0, duration: 1.0, ease: EASE }, 27.0);
-tl.to("#chart-reveal", { width: 1100, duration: 3.2, ease: "power1.inOut" }, 28.2);
-tl.fromTo("#notif", { opacity: 0, y: 60, scale: 0.95 }, { opacity: 1, y: 0, scale: 1, duration: 1.1, ease: "power3.out" }, 33.4);
-tl.fromTo("#restraint .r:nth-child(1)", { opacity: 0, y: 36 }, { opacity: 1, y: 0, duration: 0.9, ease: EASE }, 39.4);
-tl.fromTo("#restraint .r:nth-child(2)", { opacity: 0, y: 36 }, { opacity: 1, y: 0, duration: 0.9, ease: EASE }, 40.1);
-tl.fromTo("#restraint .r:nth-child(3)", { opacity: 0, y: 36 }, { opacity: 1, y: 0, duration: 0.9, ease: EASE }, 40.8);
-tl.fromTo("#s3-foot", { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 1.1, ease: EASE }, 43.2);
-tl.to("#s3", { opacity: 0, duration: 1.1 }, 46.8);
+/* S3 功能介绍 22.6-42 */
+tl.fromTo("#s3", { opacity: 0 }, { opacity: 1, duration: 1.0 }, 22.7);
+tl.fromTo("#s3-head", { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 1.2, ease: EASE }, 23.7);
+tl.fromTo("#s3-tag", { opacity: 0, y: 22 }, { opacity: 1, y: 0, duration: 1.0, ease: EASE }, 24.8);
+tl.to("#chart-reveal", { width: 1100, duration: 2.8, ease: "power1.inOut" }, 25.8);
+tl.fromTo("#notif", { opacity: 0, y: 60, scale: 0.95 }, { opacity: 1, y: 0, scale: 1, duration: 1.1, ease: "power3.out" }, 29.4);
+tl.fromTo("#restraint .r:nth-child(1)", { opacity: 0, y: 36 }, { opacity: 1, y: 0, duration: 0.9, ease: EASE }, 33.4);
+tl.fromTo("#restraint .r:nth-child(2)", { opacity: 0, y: 36 }, { opacity: 1, y: 0, duration: 0.9, ease: EASE }, 34.0);
+tl.fromTo("#restraint .r:nth-child(3)", { opacity: 0, y: 36 }, { opacity: 1, y: 0, duration: 0.9, ease: EASE }, 34.6);
+tl.fromTo("#s3-foot", { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 1.1, ease: EASE }, 36.8);
+tl.to("#s3", { opacity: 0, duration: 1.1 }, 40.8);
 
-/* S4 杭州小朱 47.6-70 */
-tl.fromTo("#s4", { opacity: 0 }, { opacity: 1, duration: 1.2 }, 47.7);
-tl.fromTo("#s4-img", { scale: 1.04 }, { scale: 1.13, duration: 22.4, ease: "none" }, 47.6);
-tl.fromTo("#persona-title", { opacity: 0, y: 26 }, { opacity: 1, y: 0, duration: 1.1, ease: EASE }, 49.0);
-tl.fromTo("#s4-cap1", { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 1.2, ease: EASE }, 51.4);
-tl.to("#s4-cap1", { opacity: 0, y: -16, duration: 0.8, ease: "power2.in" }, 56.2);
-tl.fromTo("#s4-cap2", { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 1.2, ease: EASE }, 57.2);
-tl.to("#s4-cap2", { opacity: 0, y: -16, duration: 0.8, ease: "power2.in" }, 62.2);
-tl.fromTo("#s4-cap3", { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 1.3, ease: EASE }, 63.2);
-tl.to("#s4", { opacity: 0, duration: 1.1 }, 68.8);
+/* S4 硬件×软件 41.6-66 */
+tl.fromTo("#s4", { opacity: 0 }, { opacity: 1, duration: 1.0 }, 41.7);
+tl.fromTo("#s4-head", { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 1.2, ease: EASE }, 42.7);
+tl.fromTo("#s4-sub", { opacity: 0, y: 22 }, { opacity: 1, y: 0, duration: 1.0, ease: EASE }, 43.8);
+tl.fromTo("#hw1", { opacity: 0, x: -50 }, { opacity: 1, x: 0, duration: 0.9, ease: "power3.out" }, 45.2);
+tl.fromTo("#hw2", { opacity: 0, x: -50 }, { opacity: 1, x: 0, duration: 0.9, ease: "power3.out" }, 47.0);
+tl.fromTo("#hw3", { opacity: 0, x: -50 }, { opacity: 1, x: 0, duration: 0.9, ease: "power3.out" }, 48.8);
+tl.fromTo("#hw4", { opacity: 0, x: -50 }, { opacity: 1, x: 0, duration: 0.9, ease: "power3.out" }, 50.6);
+tl.fromTo("#pp1", { opacity: 0, y: 40 }, { opacity: 1, y: 0, duration: 0.9, ease: "power3.out" }, 54.4);
+tl.fromTo("#pa1", { opacity: 0 }, { opacity: 1, duration: 0.5 }, 55.4);
+tl.fromTo("#pp2", { opacity: 0, y: 40 }, { opacity: 1, y: 0, duration: 0.9, ease: "power3.out" }, 56.0);
+tl.fromTo("#pa2", { opacity: 0 }, { opacity: 1, duration: 0.5 }, 57.0);
+tl.fromTo("#pp3", { opacity: 0, y: 40 }, { opacity: 1, y: 0, duration: 0.9, ease: "power3.out" }, 57.6);
+tl.to("#s4", { opacity: 0, duration: 1.1 }, 64.8);
 
-/* S5 自由 69.6-88 */
-tl.fromTo("#s5", { opacity: 0 }, { opacity: 1, duration: 1.2 }, 69.7);
-tl.fromTo("#s5-img", { scale: 1.12 }, { scale: 1.03, duration: 18.4, ease: "none" }, 69.6);
-tl.fromTo("#s5-l1", { opacity: 0, y: 28 }, { opacity: 1, y: 0, duration: 1.2, ease: EASE }, 71.2);
-tl.fromTo("#s5-l2", { opacity: 0, y: 28 }, { opacity: 1, y: 0, duration: 1.2, ease: EASE }, 74.4);
-tl.fromTo("#s5-l3", { opacity: 0, y: 32, scale: 0.97 }, { opacity: 1, y: 0, scale: 1, duration: 1.4, ease: EASE }, 78.0);
-tl.fromTo("#fc1", { opacity: 0, y: 40 }, { opacity: 1, y: 0, duration: 0.8, ease: "power3.out" }, 81.6);
-tl.fromTo("#fc2", { opacity: 0, y: 40 }, { opacity: 1, y: 0, duration: 0.8, ease: "power3.out" }, 82.0);
-tl.fromTo("#fc3", { opacity: 0, y: 40 }, { opacity: 1, y: 0, duration: 0.8, ease: "power3.out" }, 82.4);
-tl.to("#s5", { opacity: 0, duration: 1.1 }, 86.8);
+/* S5 AI 65.6-86 */
+tl.fromTo("#s5x", { opacity: 0 }, { opacity: 1, duration: 1.0 }, 65.7);
+tl.fromTo("#s5-head", { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 1.2, ease: EASE }, 66.8);
+tl.fromTo("#ai1", { opacity: 0, x: -50 }, { opacity: 1, x: 0, duration: 0.9, ease: "power3.out" }, 68.6);
+tl.fromTo("#ai2", { opacity: 0, x: -50 }, { opacity: 1, x: 0, duration: 0.9, ease: "power3.out" }, 70.6);
+tl.fromTo("#ai3", { opacity: 0, x: -50 }, { opacity: 1, x: 0, duration: 0.9, ease: "power3.out" }, 72.6);
+tl.fromTo("#ai4", { opacity: 0, x: -50 }, { opacity: 1, x: 0, duration: 0.9, ease: "power3.out" }, 74.6);
+tl.fromTo("#ai-close", { opacity: 0, y: 28, scale: 0.97 }, { opacity: 1, y: 0, scale: 1, duration: 1.4, ease: EASE }, 78.4);
+tl.to("#s5x", { opacity: 0, duration: 1.1 }, 84.4);
 
-/* S6 实现走向 87.6-106 */
-tl.fromTo("#s6", { opacity: 0 }, { opacity: 1, duration: 1.0 }, 87.7);
-tl.fromTo("#s6-head", { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 1.2, ease: EASE }, 88.8);
-tl.fromTo("#rm1", { opacity: 0, x: -50 }, { opacity: 1, x: 0, duration: 0.9, ease: "power3.out" }, 90.8);
-tl.fromTo("#rm2", { opacity: 0, x: -50 }, { opacity: 1, x: 0, duration: 0.9, ease: "power3.out" }, 93.2);
-tl.fromTo("#rm3", { opacity: 0, x: -50 }, { opacity: 1, x: 0, duration: 0.9, ease: "power3.out" }, 95.6);
-tl.fromTo("#rm4", { opacity: 0, x: -50 }, { opacity: 1, x: 0, duration: 0.9, ease: "power3.out" }, 98.0);
-tl.fromTo("#s6-foot", { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 1.1, ease: EASE }, 100.8);
-tl.to("#s6", { opacity: 0, duration: 1.1 }, 104.8);
+/* S6 小朱×七七 85.6-106 */
+tl.fromTo("#s6p", { opacity: 0 }, { opacity: 1, duration: 1.2 }, 85.7);
+tl.fromTo("#s6-img", { scale: 1.04 }, { scale: 1.13, duration: 20.4, ease: "none" }, 85.6);
+tl.fromTo("#persona-title", { opacity: 0, y: 26 }, { opacity: 1, y: 0, duration: 1.1, ease: EASE }, 87.0);
+tl.fromTo("#s6-cap1", { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 1.2, ease: EASE }, 89.0);
+tl.to("#s6-cap1", { opacity: 0, y: -16, duration: 0.8, ease: "power2.in" }, 93.2);
+tl.fromTo("#s6-cap2", { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 1.2, ease: EASE }, 94.2);
+tl.to("#s6-cap2", { opacity: 0, y: -16, duration: 0.8, ease: "power2.in" }, 98.6);
+tl.fromTo("#s6-cap3", { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 1.3, ease: EASE }, 99.6);
+tl.to("#s6p", { opacity: 0, duration: 1.1 }, 104.8);
 
-/* S7 定位与人群 105.6-122 */
-tl.fromTo("#s7", { opacity: 0 }, { opacity: 1, duration: 1.0 }, 105.7);
-tl.fromTo("#s7-l1", { opacity: 0, y: 28 }, { opacity: 1, y: 0, duration: 1.3, ease: EASE }, 106.8);
-tl.to("#s7-l1", { opacity: 0, y: -18, duration: 0.9, ease: "power2.in" }, 109.8);
-tl.fromTo("#s7-l2", { opacity: 0, y: 28 }, { opacity: 1, y: 0, duration: 1.3, ease: EASE }, 110.8);
-tl.to("#s7-l2", { opacity: 0, y: -18, duration: 0.9, ease: "power2.in" }, 113.8);
-tl.fromTo("#pc1", { opacity: 0, y: 70 }, { opacity: 1, y: 0, duration: 1.0, ease: "power3.out" }, 114.8);
-tl.fromTo("#pc2", { opacity: 0, y: 70 }, { opacity: 1, y: 0, duration: 1.0, ease: "power3.out" }, 115.3);
-tl.fromTo("#pc3", { opacity: 0, y: 70 }, { opacity: 1, y: 0, duration: 1.0, ease: "power3.out" }, 115.8);
-tl.to("#s7", { opacity: 0, duration: 1.1 }, 120.8);
+/* S7 自由 105.6-121 */
+tl.fromTo("#s7f", { opacity: 0 }, { opacity: 1, duration: 1.2 }, 105.7);
+tl.fromTo("#s7-img", { scale: 1.12 }, { scale: 1.03, duration: 15.4, ease: "none" }, 105.6);
+tl.fromTo("#s7-l1", { opacity: 0, y: 28 }, { opacity: 1, y: 0, duration: 1.2, ease: EASE }, 107.0);
+tl.fromTo("#s7-l2", { opacity: 0, y: 28 }, { opacity: 1, y: 0, duration: 1.2, ease: EASE }, 109.6);
+tl.fromTo("#s7-l3", { opacity: 0, y: 32, scale: 0.97 }, { opacity: 1, y: 0, scale: 1, duration: 1.4, ease: EASE }, 112.4);
+tl.fromTo("#fc1", { opacity: 0, y: 40 }, { opacity: 1, y: 0, duration: 0.8, ease: "power3.out" }, 115.2);
+tl.fromTo("#fc2", { opacity: 0, y: 40 }, { opacity: 1, y: 0, duration: 0.8, ease: "power3.out" }, 115.6);
+tl.fromTo("#fc3", { opacity: 0, y: 40 }, { opacity: 1, y: 0, duration: 0.8, ease: "power3.out" }, 116.0);
+tl.to("#s7f", { opacity: 0, duration: 1.1 }, 119.8);
 
-/* S8 愿景 121.6-135 */
-tl.fromTo("#s8", { opacity: 0 }, { opacity: 1, duration: 1.2 }, 121.7);
-tl.fromTo("#net-dots", { opacity: 0 }, { opacity: 0.5, duration: 2.4 }, 121.7);
-tl.fromTo("#s8-l1", { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 1.3, ease: EASE }, 123.0);
-tl.fromTo("#s8-l2", { opacity: 0, y: 26 }, { opacity: 1, y: 0, duration: 1.2, ease: EASE }, 126.6);
-tl.fromTo("#s8-l3", { opacity: 0, y: 22 }, { opacity: 1, y: 0, duration: 1.2, ease: EASE }, 129.8);
-tl.to("#s8", { opacity: 0, duration: 1.1 }, 133.8);
+/* S8 网络节点 120.6-143 */
+tl.fromTo("#s8n", { opacity: 0 }, { opacity: 1, duration: 1.2 }, 120.7);
+tl.fromTo("#net-dots", { opacity: 0 }, { opacity: 0.45, duration: 2.4 }, 120.7);
+tl.fromTo("#s8-head", { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 1.3, ease: EASE }, 122.0);
+tl.fromTo("#nr1", { opacity: 0, x: -50 }, { opacity: 1, x: 0, duration: 0.9, ease: "power3.out" }, 124.2);
+tl.fromTo("#nr2", { opacity: 0, x: -50 }, { opacity: 1, x: 0, duration: 0.9, ease: "power3.out" }, 126.4);
+tl.fromTo("#nr3", { opacity: 0, x: -50 }, { opacity: 1, x: 0, duration: 0.9, ease: "power3.out" }, 128.6);
+tl.fromTo("#value-title", { opacity: 0, y: 22 }, { opacity: 1, y: 0, duration: 1.0, ease: EASE }, 131.6);
+tl.fromTo("#vc1", { opacity: 0, y: 36 }, { opacity: 1, y: 0, duration: 0.8, ease: "power3.out" }, 132.8);
+tl.fromTo("#vc2", { opacity: 0, y: 36 }, { opacity: 1, y: 0, duration: 0.8, ease: "power3.out" }, 133.2);
+tl.fromTo("#vc3", { opacity: 0, y: 36 }, { opacity: 1, y: 0, duration: 0.8, ease: "power3.out" }, 133.6);
+tl.fromTo("#vc4", { opacity: 0, y: 36 }, { opacity: 1, y: 0, duration: 0.8, ease: "power3.out" }, 134.0);
+tl.to("#s8n", { opacity: 0, duration: 1.1 }, 141.8);
 
-/* S9 结尾 134.6-150 */
-tl.fromTo("#s9-l1", { opacity: 0, y: 28 }, { opacity: 1, y: 0, duration: 1.5, ease: EASE }, 136.0);
-tl.to("#s9-l1", { opacity: 0, y: -18, duration: 1.0, ease: "power2.in" }, 141.2);
-tl.fromTo("#s9-final", { opacity: 0, scale: 0.96 }, { opacity: 1, scale: 1, duration: 1.6, ease: EASE }, 142.6);
-tl.fromTo("#end-slogan", { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 1.2, ease: EASE }, 143.9);
-tl.to("#s9 .center-stack", { opacity: 0, duration: 1.3, ease: "power2.in" }, 148.4);
+/* S9 致敬与对比 142.6-161 */
+tl.fromTo("#s9v", { opacity: 0 }, { opacity: 1, duration: 1.0 }, 142.7);
+tl.fromTo("#s9v-l1", { opacity: 0, y: 28 }, { opacity: 1, y: 0, duration: 1.2, ease: EASE }, 143.8);
+tl.fromTo("#s9v-sub", { opacity: 0, y: 22 }, { opacity: 1, y: 0, duration: 1.1, ease: EASE }, 145.0);
+tl.to("#s9v-l1", { opacity: 0, y: -16, duration: 0.8, ease: "power2.in" }, 147.4);
+tl.to("#s9v-sub", { opacity: 0, y: -16, duration: 0.8, ease: "power2.in" }, 147.5);
+tl.fromTo("#vs-card", { opacity: 0, y: 60, scale: 0.96 }, { opacity: 1, y: 0, scale: 1, duration: 1.2, ease: "power3.out" }, 148.4);
+tl.to("#vs-card", { opacity: 0, y: -24, duration: 0.9, ease: "power2.in" }, 154.6);
+tl.fromTo("#s9v-close", { opacity: 0, y: 28 }, { opacity: 1, y: 0, duration: 1.3, ease: EASE }, 155.8);
+tl.to("#s9v", { opacity: 0, duration: 1.1 }, 159.8);
+
+/* S10 路线图 160.6-172 */
+tl.fromTo("#s10r", { opacity: 0 }, { opacity: 1, duration: 1.0 }, 160.7);
+tl.fromTo("#s10-head", { opacity: 0, y: 28 }, { opacity: 1, y: 0, duration: 1.1, ease: EASE }, 161.6);
+tl.fromTo("#rm1", { opacity: 0, x: -50 }, { opacity: 1, x: 0, duration: 0.8, ease: "power3.out" }, 163.0);
+tl.fromTo("#rm2", { opacity: 0, x: -50 }, { opacity: 1, x: 0, duration: 0.8, ease: "power3.out" }, 164.4);
+tl.fromTo("#rm3", { opacity: 0, x: -50 }, { opacity: 1, x: 0, duration: 0.8, ease: "power3.out" }, 165.8);
+tl.fromTo("#rm4", { opacity: 0, x: -50 }, { opacity: 1, x: 0, duration: 0.8, ease: "power3.out" }, 167.2);
+tl.to("#s10r", { opacity: 0, duration: 1.1 }, 170.6);
+
+/* S11 结尾 171.6-195 */
+tl.fromTo("#s11-l1", { opacity: 0, y: 28 }, { opacity: 1, y: 0, duration: 1.5, ease: EASE }, 173.0);
+tl.to("#s11-l1", { opacity: 0, y: -18, duration: 1.0, ease: "power2.in" }, 178.6);
+tl.fromTo("#s11-final", { opacity: 0, scale: 0.96 }, { opacity: 1, scale: 1, duration: 1.6, ease: EASE }, 180.0);
+tl.fromTo("#end-slogan", { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 1.2, ease: EASE }, 181.4);
+tl.to("#s11 .center-stack", { opacity: 0, duration: 1.5, ease: "power2.in" }, 192.8);
 
 window.__timelines["main"] = tl;
 </script>
