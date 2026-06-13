@@ -98,6 +98,7 @@
 
   /* S9 对比 */
   #s9v .center-stack { gap: 30px; }
+  #s9v .s9-beat { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 30px; text-align: center; }
   #s9v-l1 { font-size: 84px; font-weight: 700; }
   #vs-card { display: flex; gap: 0; border-radius: 28px; overflow: hidden; box-shadow: 0 40px 100px rgba(0,0,0,.5); }
   .vs-col { width: 560px; padding: 40px 50px; }
@@ -262,8 +263,11 @@
   <!-- S9 · 致敬与对比 142.6-161 -->
   <div id="s9v" class="scene clip dark-stage" data-start="142.6" data-duration="18.4" data-track-index="1">
     <div class="center-stack">
-      <div id="s9v-l1">向先行者致敬。</div>
-      <div class="subline" id="s9v-sub">定位与活动追踪,Tractive 们已经做得很好。</div>
+      <div class="s9-beat">
+        <div id="s9v-l1">向先行者致敬。</div>
+        <div class="subline" id="s9v-sub">定位与活动追踪,Tractive 们已经做得很好。</div>
+      </div>
+      <div class="s9-beat">
       <div id="vs-card">
         <div class="vs-col dim">
           <div class="vs-head">优秀的追踪器</div>
@@ -286,7 +290,10 @@
           <div class="vs-row"><span>兽医与保障闭环</span><span class="yes">✓</span></div>
         </div>
       </div>
-      <div id="s9v-close">我们不是更好的追踪器。<br>我们是追踪器之后的<span class="hl">下一步</span>。</div>
+      </div>
+      <div class="s9-beat">
+        <div id="s9v-close">我们不是更好的追踪器。<br>我们是追踪器之后的<span class="hl">下一步</span>。</div>
+      </div>
     </div>
   </div>
 
